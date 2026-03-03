@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import CursorGlow from "@/components/CursorGlow";
+import ScorpionCursor from "@/components/ScorpionCursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className="bg-[#0a0e1a] text-[#f1f5f9] antialiased selection:bg-brand-blue/30 overflow-x-hidden">
         <ParticleCanvas />
         <CursorGlow />
+        <ScorpionCursor />
         <Navbar />
         <main className="relative z-10">{children}</main>
         <Footer />

@@ -144,12 +144,24 @@ export default function ScorpionCursor() {
       t++;
       ctx.clearRect(0, 0, W, H);
 
-      // Smooth head movement
+      // Smooth head movement toward mouse
       headX += (mouse.x - headX) * 0.1;
       headY += (mouse.y - headY) * 0.1;
 
-      let targetX = headX;
-      let targetY = headY;
+      // Smooth head movement
+      // let targetX = headX;
+      // let targetY = headY;
+
+      // Offset scorpion head away from cursor by a gap distance
+      const GAP = 40;
+      const dxHead = headX - mouse.x;
+      const dyHead = headY - mouse.y;
+      const distHead = Math.sqrt(dxHead * dxHead + dyHead * dyHead) || 1;
+      const offsetX = (dxHead / distHead) * GAP;
+      const offsetY = (dyHead / distHead) * GAP;
+
+      let targetX = headX + offsetX;
+      let targetY = headY + offsetY;
 
       // Draw spine and body parts
       for (let i = 0; i < bodySegments.length; i++) {

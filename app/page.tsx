@@ -13,7 +13,6 @@ export default function HomePage() {
     <div className="flex flex-col">
       <Hero />
 
-
       <div id="about">
         <About />
       </div>

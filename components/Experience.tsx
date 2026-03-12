@@ -30,7 +30,10 @@ export default function Experience() {
                     <h4 className="text-xl font-bold text-white tracking-tight">
                       {job.role}
                     </h4>
-                    <p className="text-brand-blue font-medium">{job.company}</p>
+                    <p className="text-brand-blue font-medium">
+                      {job.company},{" "}
+                      <span className="text-slate-500">{job.location}</span>
+                    </p>
                   </div>
                   <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">
                     {job.period}

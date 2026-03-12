@@ -16,15 +16,22 @@ export const PERSONAL = {
 export const SKILLS: { category: string; items: string[] }[] = [
   {
     category: "Frontend",
-    items: ["React", "Next.js", "Redux", "TypeScript", "JavaScript"],
+    items: ["React", "Next.js", "View.js", "Redux", "TypeScript", "JavaScript"],
   },
   {
     category: "Backend",
-    items: ["Node.js", "NestJS", "Express", "REST APIs", "Microservices"],
+    items: [
+      "Node.js",
+      "NestJS",
+      "Express",
+      "REST APIs",
+      "Microservices",
+      "Swagger Docs",
+    ],
   },
   {
     category: "Database",
-    items: ["MongoDB", "PostgreSQL", "MySQL"],
+    items: ["MongoDB", "PostgreSQL", "MySQL", "MariaDB", "DynamoDB"],
   },
   {
     category: "DevOps & Tools",
@@ -40,6 +47,18 @@ export const SKILLS: { category: string; items: string[] }[] = [
       "Twilio",
       "SendGrid",
       "Shopify",
+    ],
+  },
+  {
+    category: "Coding & AI Tools",
+    items: [
+      "OpenAI (GPT)",
+      "Gemini",
+      "Claude",
+      "Antigravity",
+      "Cursor",
+      "OpenAI Codex",
+      "Perplexity AI",
     ],
   },
 ];
@@ -58,7 +77,7 @@ export const EXPERIENCE = [
       "Designed backend architecture for 15+ production systems",
       "Implemented microservices architecture for scalable platforms",
       "Integrated payment (Stripe, Razorpay) & communication APIs (Twilio, SendGrid)",
-      "Worked in 4–5 member agile teams with cross-functional collaboration",
+      // "Worked in 4–5 member agile teams with cross-functional collaboration",
     ],
   },
   {

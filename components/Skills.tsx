@@ -23,14 +23,14 @@ const item: Variants = {
 export default function Skills() {
   return (
     <AnimatedSection id="skills" className="bg-dark-800/30">
-      <div className="text-center mb-16">
+      <div className="text-center mb-10">
         <h2 className="section-label mx-auto">02. Tech Stack</h2>
         <h3 className="text-3xl md:text-4xl font-bold">
           Skills & Technologies
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {SKILLS.map((category) => (
           <div key={category.category} className="glass p-6 flex flex-col">
             <h4 className="text-white font-bold mb-6 flex items-center gap-2">
@@ -42,7 +42,7 @@ export default function Skills() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="flex flex-wrap gap-2 mt-auto"
+              className="flex flex-wrap gap-2"
             >
               {category.items.map((skill) => (
                 <motion.span

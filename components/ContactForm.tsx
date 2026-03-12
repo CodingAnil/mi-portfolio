@@ -20,8 +20,8 @@ export default function ContactForm() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       e.email = "Enter a valid email address.";
     if (!form.message.trim()) e.message = "Message is required.";
-    else if (form.message.trim().length < 10)
-      e.message = "Message must be at least 10 characters.";
+    else if (form.message.trim().length < 2)
+      e.message = "Message must be at least 2 characters.";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -40,14 +40,40 @@ export default function ContactForm() {
     if (!validate()) return;
     setState({ status: "loading", message: "" });
 
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1500));
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "03838d44-2fee-4e9a-9e9d-83b218a2f1f8",
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          from_name: "Portfolio Contact Form",
+          subject: `New Message from ${form.name}`,
+        }),
+      });
 
-    setState({
-      status: "success",
-      message: "Message sent! I'll get back to you soon.",
-    });
-    setForm(INITIAL_FORM);
+      const result = await response.json();
+
+      if (result.success) {
+        setState({
+          status: "success",
+          message: "Message sent! I'll get back to you soon.",
+        });
+        setForm(INITIAL_FORM);
+      } else {
+        throw new Error(result.message || "Submission failed");
+      }
+    } catch (err) {
+      setState({
+        status: "error",
+        message: "Something went wrong. Please try again later.",
+      });
+    }
   };
 
   return (
@@ -228,6 +254,24 @@ export default function ContactForm() {
               ✓ Message Sent Successfully!
             </p>
           </motion.div>
+        ) : state.status === "error" ? (
+          <div className="space-y-4">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-center"
+            >
+              <p className="text-red-400 text-sm font-bold tracking-tight">
+                ⚠ {state.message || "Something went wrong. Try again."}
+              </p>
+            </motion.div>
+            <button
+              type="submit"
+              className="btn-glow w-full justify-center group"
+            >
+              Try Again
+            </button>
+          </div>
         ) : (
           <button
             type="submit"

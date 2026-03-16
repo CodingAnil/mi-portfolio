@@ -21,63 +21,64 @@ const item: Variants = {
 };
 
 export default function Hero() {
+  const handleScrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
-      className="relative min-h-screen flex items-center pt-16"
+      className="relative min-h-screen flex items-center pt-20 grid-overlay overflow-hidden"
       aria-label="Hero – Introduction"
     >
-      {/* Radial glow behind name */}
+      {/* Background glow behind name */}
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(79,142,247,0.07) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%)",
         }}
         aria-hidden="true"
       />
 
       {/* Owl — top right corner */}
       <div
-        className="absolute top-24 right-8 md:right-16 z-10 hidden sm:block"
+        className="absolute top-24 right-8 md:right-16 z-20 hidden sm:block"
         aria-hidden="true"
       >
         <Owl />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-10 w-full">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 w-full">
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
           className="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16"
         >
-          {/* Profile image */}
-          <motion.div variants={item} className="flex-shrink-0">
-            <div className="relative">
-              <div
-                className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden ring-2 ring-white/10"
-                style={{ boxShadow: "0 0 60px rgba(79,142,247,0.15)" }}
-              >
+          {/* Profile image with brand styling */}
+          <motion.div variants={item} className="flex-shrink-0 relative">
+            <div className="relative group">
+              <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-white/10 shadow-2xl transition-all duration-500 group-hover:border-accent-cyan/30 group-hover:shadow-glow-cyan">
                 <Image
                   src="/images/profile.jpg"
                   alt="Anil Kumar – Senior MERN Stack Developer"
                   width={224}
                   height={224}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700"
                   priority
                 />
               </div>
-              {/* Available badge */}
-              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-dark-800/90 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1 shadow-lg whitespace-nowrap">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs text-slate-300 font-medium">
+              {/* Available badge with brand colors */}
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-bg-card/90 backdrop-blur-md border border-accent-green/30 rounded-full px-4 py-1.5 shadow-lg whitespace-nowrap">
+                <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse shadow-[0_0_8px_#10D98A]" />
+                <span className="text-[10px] text-accent-green font-bold uppercase tracking-widest">
                   Available for work
                 </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Text */}
+          {/* Text Content */}
           <div className="flex-1 text-center md:text-left">
             <motion.p variants={item} className="section-label mb-3">
               Senior MERN Stack Developer
@@ -85,49 +86,54 @@ export default function Hero() {
 
             <motion.h1
               variants={item}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-none mb-6 gradient-name"
+              className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-6 tracking-tight text-white"
             >
-              {PERSONAL.name}
+              Anil{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
+                Kumar
+              </span>
             </motion.h1>
 
             <motion.p
               variants={item}
-              className="text-slate-400 text-lg leading-relaxed max-w-xl mb-8"
+              className="text-text-secondary text-lg leading-relaxed max-w-xl mb-8 mx-auto md:mx-0"
             >
               {PERSONAL.tagline}
             </motion.p>
 
-            {/* Stats */}
+            {/* Stats - Clean Row */}
             <motion.div
               variants={item}
-              className="flex gap-8 mb-8 justify-center md:justify-start"
+              className="flex gap-8 mb-10 justify-center md:justify-start"
             >
               {[
                 { v: "4+", l: "Years Exp." },
                 { v: "18+", l: "Projects" },
                 { v: "400+", l: "APIs Built" },
               ].map(({ v, l }) => (
-                <div key={l} className="text-center md:text-left">
-                  <p className="text-2xl font-bold text-white">{v}</p>
-                  <p className="text-xs text-slate-500 uppercase tracking-wider mt-0.5">
+                <div key={l}>
+                  <p className="text-2xl font-black text-white">{v}</p>
+                  <p className="text-[10px] text-text-muted uppercase tracking-widest font-bold">
                     {l}
                   </p>
                 </div>
               ))}
             </motion.div>
 
-            {/* CTA */}
+            {/* CTAs with premium styles */}
             <motion.div
               variants={item}
               className="flex flex-wrap gap-3 justify-center md:justify-start"
             >
-              <a href={PERSONAL.resumeUrl} download className="btn-glow">
-                ↓ Download Resume
-              </a>
+              <button
+                onClick={handleScrollToContact}
+                className="btn-primary group"
+              >
+                <span>Hire Me →</span>
+              </button>
               <Link
                 href={PERSONAL.github}
                 target="_blank"
-                rel="noopener noreferrer"
                 className="btn-ghost"
               >
                 GitHub
@@ -135,7 +141,6 @@ export default function Hero() {
               <Link
                 href={PERSONAL.linkedin}
                 target="_blank"
-                rel="noopener noreferrer"
                 className="btn-ghost"
               >
                 LinkedIn
@@ -148,18 +153,10 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          aria-hidden="true"
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
         >
-          <span className="text-xs text-slate-600 tracking-widest uppercase">
-            .
-          </span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            className="w-px h-8 bg-gradient-to-b from-slate-600 to-transparent"
-          />
+          <div className="w-px h-12 bg-gradient-to-b from-accent-cyan to-transparent animate-pulse" />
         </motion.div>
       </div>
     </section>

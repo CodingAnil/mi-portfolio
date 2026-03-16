@@ -6,7 +6,7 @@ export const PERSONAL = {
     "Building scalable SaaS platforms, AI-powered systems, and high-performance web applications.",
   email: "programmeranil36@gmail.com",
   phone: "+91 9518002533",
-  location: "Mohali, India",
+  location: "Mohali (Punjab), India",
   github: "https://github.com/CodingAnil",
   linkedin: "https://www.linkedin.com/in/anil-kumar-mern",
   resumeUrl: "/file/Anil_Kumar_CV.pdf",

@@ -27,7 +27,7 @@ export default function RootLayout({
         <ParticleCanvas />
         <CursorGlow />
         <ScorpionCursor />
-        {/* <JellyfishCursor /> */}
+        <JellyfishCursor />
         <Navbar />
         <main className="relative z-10">{children}</main>
         <Footer />

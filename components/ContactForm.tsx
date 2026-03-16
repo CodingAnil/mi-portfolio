@@ -77,226 +77,174 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-      <div>
-        <h2 className="section-label">05. Contact</h2>
-        <h3 className="text-3xl font-bold mb-6 text-white">Get In Touch</h3>
-        <p className="text-slate-400 leading-relaxed mb-8">
-          I&apos;m currently open to new opportunities and collaborations.
-          Whether you have a question or just want to say hi, I&apos;ll try my
-          best to get back to you!
-        </p>
+    <section
+      id="contact"
+      className="py-20 bg-bg-primary relative overflow-hidden"
+      style={{ background: "var(--bg-secondary)" }}
+    >
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 reveal visible">
+          {/* Info Side */}
+          <div>
+            <h2 className="section-label">05. Contact</h2>
+            <h3 className="text-4xl md:text-5xl font-black mb-8 text-white leading-tight">
+              Get In{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
+                Touch
+              </span>
+            </h3>
+            <p className="text-text-secondary text-lg leading-relaxed mb-12">
+              I&apos;m currently open to new opportunities and collaborations.
+              Whether you have a question or just want to say hi, I&apos;ll try
+              my best to get back to you!
+            </p>
 
-        <div className="space-y-6">
-          <div className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors">
-            <div className="w-10 h-10 rounded-xl glass flex items-center justify-center text-brand-blue">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
+            <div className="space-y-6">
+              {[
+                {
+                  icon: (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  ),
+                  value: PERSONAL.email,
+                  href: `mailto:${PERSONAL.email}`,
+                },
+                {
+                  icon: (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.826L10.242 9.242a4 4 0 115.656 5.656l-1.101 1.101m-.758-4.826L12 12"
+                    />
+                  ),
+                  value: "Anil Kumar(LinkedIn)",
+                  href: PERSONAL.linkedin,
+                },
+                {
+                  icon: (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                  ),
+                  value: PERSONAL.location,
+                  href: "https://www.google.com/maps/search/?api=1&query=Omega+City+Mohali+Punjab",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-6 group transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-accent-cyan group-hover:bg-accent-cyan group-hover:text-white transition-all">
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      {item.icon}
+                    </svg>
+                  </div>
+                  <a
+                    href={item.href}
+                    target={item.value === PERSONAL.email ? "_self" : "_blank"}
+                    className="text-white font-bold group-hover:text-accent-cyan transition-colors"
+                  >
+                    {item.value}
+                  </a>
+                </div>
+              ))}
             </div>
-            <a
-              href={`mailto:${PERSONAL.email}`}
-              className="text-sm font-medium tracking-tight"
-            >
-              {PERSONAL.email}
-            </a>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors">
-            <div className="w-10 h-10 rounded-xl glass flex items-center justify-center text-brand-blue">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.826L10.242 9.242a4 4 0 115.656 5.656l-1.101 1.101m-.758-4.826L12 12"
+          {/* Form Side */}
+          <div className="glass-card p-8">
+            <form onSubmit={handleSubmit} noValidate className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
+                  Full Name
+                </label>
+                <input
+                  name="name"
+                  type="text"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="John Doe"
+                  className={`w-full bg-white/[0.03] border ${errors.name ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-2xl px-5 py-4 text-white transition-all placeholder:text-text-muted/30`}
                 />
-              </svg>
-            </div>
-            <a
-              href={PERSONAL.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium tracking-tight"
-            >
-              Anil Kumar (LinkedIn)
-            </a>
-          </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
+                  Email Address
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="john@example.com"
+                  className={`w-full bg-white/[0.03] border ${errors.email ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-2xl px-5 py-4 text-white transition-all placeholder:text-text-muted/30`}
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
+                  Your Message
+                </label>
+                <textarea
+                  name="message"
+                  rows={4}
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="Tell me about your project..."
+                  className={`w-full bg-white/[0.03] border ${errors.message ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-2xl px-5 py-4 text-white transition-all placeholder:text-text-muted/30 resize-none`}
+                />
+              </div>
 
-          <div className="flex items-center gap-4 text-slate-400 hover:text-white transition-colors">
-            <div className="w-10 h-10 rounded-xl glass flex items-center justify-center text-brand-blue">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <button
+                type="submit"
+                disabled={state.status === "loading"}
+                className="btn-primary w-full group overflow-hidden"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </div>
-            <span className="text-sm font-medium tracking-tight">
-              {PERSONAL.location}
-            </span>
+                <span className="flex items-center justify-center gap-3">
+                  {state.status === "loading" ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      Send Message
+                      <svg
+                        className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
+                      </svg>
+                    </>
+                  )}
+                </span>
+              </button>
+
+              {state.status === "success" && (
+                <p className="text-center text-accent-green font-bold text-xs uppercase tracking-widest">
+                  ✓ Message Sent
+                </p>
+              )}
+            </form>
           </div>
         </div>
       </div>
-
-      <motion.form
-        onSubmit={handleSubmit}
-        noValidate
-        className="glass p-8 space-y-5"
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-      >
-        <div>
-          <label
-            htmlFor="c-name"
-            className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
-          >
-            Full Name
-          </label>
-          <input
-            id="c-name"
-            name="name"
-            type="text"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="John Doe"
-            className={`c-input ${errors.name ? "ring-red-500/50" : ""}`}
-          />
-          {errors.name && (
-            <p className="text-[10px] text-red-500 mt-1 font-bold uppercase tracking-wide">
-              {errors.name}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label
-            htmlFor="c-email"
-            className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
-          >
-            Email Address
-          </label>
-          <input
-            id="c-email"
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="john@example.com"
-            className={`c-input ${errors.email ? "ring-red-500/50" : ""}`}
-          />
-          {errors.email && (
-            <p className="text-[10px] text-red-500 mt-1 font-bold uppercase tracking-wide">
-              {errors.email}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label
-            htmlFor="c-message"
-            className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
-          >
-            Your Message
-          </label>
-          <textarea
-            id="c-message"
-            name="message"
-            rows={4}
-            value={form.message}
-            onChange={handleChange}
-            placeholder="I'd like to talk about..."
-            className={`c-input resize-none ${errors.message ? "ring-red-500/50" : ""}`}
-          />
-          {errors.message && (
-            <p className="text-[10px] text-red-500 mt-1 font-bold uppercase tracking-wide">
-              {errors.message}
-            </p>
-          )}
-        </div>
-
-        {state.status === "success" ? (
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center"
-          >
-            <p className="text-emerald-400 text-sm font-bold tracking-tight">
-              ✓ Message Sent Successfully!
-            </p>
-          </motion.div>
-        ) : state.status === "error" ? (
-          <div className="space-y-4">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-center"
-            >
-              <p className="text-red-400 text-sm font-bold tracking-tight">
-                ⚠ {state.message || "Something went wrong. Try again."}
-              </p>
-            </motion.div>
-            <button
-              type="submit"
-              className="btn-glow w-full justify-center group"
-            >
-              Try Again
-            </button>
-          </div>
-        ) : (
-          <button
-            type="submit"
-            disabled={state.status === "loading"}
-            className="btn-glow w-full justify-center group"
-          >
-            {state.status === "loading"
-              ? "Encrypting & Sending..."
-              : "Send Message"}
-            <svg
-              className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </button>
-        )}
-      </motion.form>
-    </div>
+    </section>
   );
 }

@@ -5,14 +5,13 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import WhyChooseMe from "@/components/WhyChooseMe";
 import ContactForm from "@/components/ContactForm";
-import AnimatedSection from "@/components/AnimatedSection";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-bg-primary">
       <Hero />
-
 
       <div id="about">
         <About />
@@ -30,10 +29,12 @@ export default function HomePage() {
         <Projects />
       </div>
 
-      <div id="contact" className="bg-dark-800/20">
-        <AnimatedSection>
-          <ContactForm />
-        </AnimatedSection>
+      <div id="why-choose-me">
+        <WhyChooseMe />
+      </div>
+
+      <div id="contact" className="bg-bg-secondary/30">
+        <ContactForm />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 class Segment {
   x: number;
@@ -74,12 +74,23 @@ class Particle {
 
 export default function JellyfishCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setActive(entry.isIntersecting);
+      },
+      { threshold: 0.1 },
+    );
+
+    const experienceSection = document.getElementById("experience");
+    if (experienceSection) observer.observe(experienceSection);
 
     let W = (canvas.width = window.innerWidth);
     let H = (canvas.height = window.innerHeight);
@@ -130,15 +141,10 @@ export default function JellyfishCursor() {
 
     const loop = () => {
       t += 0.05;
-
-      // Clear with slight persistence for movement trail
-      ctx.fillStyle = "rgba(10, 14, 26, 0.15)";
-      ctx.globalCompositeOperation = "source-over";
       ctx.clearRect(0, 0, W, H);
 
       const targetX = mouse.x;
       const targetY = mouse.y;
-
       const dx = targetX - headX;
       const dy = targetY - headY;
 
@@ -151,7 +157,6 @@ export default function JellyfishCursor() {
       const moveAngle = Math.atan2(velocityY, velocityX);
       const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
 
-      // Emit particles from bell
       if (Math.random() > 0.7) {
         const pColor =
           Math.random() > 0.5
@@ -160,7 +165,6 @@ export default function JellyfishCursor() {
         particles.push(new Particle(headX, headY, pColor));
       }
 
-      // Update and draw particles
       for (let i = particles.length - 1; i >= 0; i--) {
         particles[i].update();
         if (particles[i].life <= 0) {
@@ -170,7 +174,6 @@ export default function JellyfishCursor() {
         }
       }
 
-      // Bell
       const pulse = Math.sin(t) * 4;
       const bellWidth = 34 + pulse;
       const bellHeight = 26 - pulse / 2;
@@ -181,25 +184,21 @@ export default function JellyfishCursor() {
         ctx.rotate(moveAngle + Math.PI / 2);
       }
 
-      // Bell shadow/glow
       ctx.shadowBlur = 25;
       ctx.shadowColor = "rgba(79, 142, 247, 0.5)";
 
-      // Bell Gradient
       const bellGradient = ctx.createRadialGradient(0, -10, 2, 0, 0, bellWidth);
-      bellGradient.addColorStop(0, "rgba(167, 139, 250, 0.8)"); // Center
+      bellGradient.addColorStop(0, "rgba(167, 139, 250, 0.8)");
       bellGradient.addColorStop(0.5, "rgba(79, 142, 247, 0.4)");
       bellGradient.addColorStop(1, "rgba(45, 212, 191, 0.1)");
 
       ctx.fillStyle = bellGradient;
       ctx.beginPath();
-      // Dome
       ctx.ellipse(0, 0, bellWidth, bellHeight, 0, Math.PI, Math.PI * 2);
       ctx.lineTo(bellWidth, 0);
       ctx.closePath();
       ctx.fill();
 
-      // Veins
       ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
       ctx.lineWidth = 0.5;
       for (let i = 0; i < 8; i++) {
@@ -213,7 +212,6 @@ export default function JellyfishCursor() {
         ctx.stroke();
       }
       ctx.restore();
-
       ctx.shadowBlur = 0;
 
       const updateTentacle = (
@@ -225,10 +223,8 @@ export default function JellyfishCursor() {
         waveAmp: number,
       ) => {
         const rot = speed > 0.5 ? moveAngle + Math.PI / 2 : 0;
-        // Correct base position based on rotation
-        const baseOffset = offsetX;
-        const startX = headX + Math.cos(rot) * baseOffset;
-        const startY = headY + Math.sin(rot) * baseOffset;
+        const startX = headX + Math.cos(rot) * offsetX;
+        const startY = headY + Math.sin(rot) * offsetX;
 
         let prevX = startX;
         let prevY = startY;
@@ -237,7 +233,6 @@ export default function JellyfishCursor() {
           const wave =
             Math.sin(t * waveFreq + i * 0.5 + offsetX) * (waveAmp + i * 0.2);
           segments[i].follow(prevX + wave, prevY + 2);
-
           prevX = segments[i].x;
           prevY = segments[i].y;
 
@@ -252,7 +247,6 @@ export default function JellyfishCursor() {
         }
       };
 
-      // Draw tentacles
       tentacles.forEach((tentacle, i) => {
         const offset = (i - numTentacles / 2) * 6;
         updateTentacle(
@@ -265,7 +259,6 @@ export default function JellyfishCursor() {
         );
       });
 
-      // Draw oral arms
       oralArms.forEach((arm, i) => {
         const offset = (i - numOralArms / 2) * 12;
         updateTentacle(arm, offset, "rgba(167, 139, 250, OP)", 3.0, 1.5, 3.0);
@@ -278,6 +271,7 @@ export default function JellyfishCursor() {
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", resize);
+      if (experienceSection) observer.unobserve(experienceSection);
       cancelAnimationFrame(animId);
     };
   }, []);
@@ -291,6 +285,8 @@ export default function JellyfishCursor() {
         left: 0,
         pointerEvents: "none",
         zIndex: 9999,
+        opacity: active ? 1 : 0,
+        transition: "opacity 0.5s ease",
       }}
     />
   );

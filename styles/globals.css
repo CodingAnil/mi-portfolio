@@ -218,6 +218,23 @@
     border: 1px solid rgba(0, 212, 255, 0.15);
     color: var(--accent-cyan);
   }
+
+  /* ── Contact: hCaptcha centered inside glass field (matches input row width) ── */
+  .contact-form-captcha > div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .contact-form-captcha .h-captcha {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    background: transparent !important;
+  }
+
+  .contact-form-captcha .h-captcha iframe {
+    max-width: 100%;
+  }
 }
 
 @keyframes pulse-glow {

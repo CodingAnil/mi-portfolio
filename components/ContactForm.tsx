@@ -20,7 +20,9 @@ export default function ContactForm() {
   const [form, setForm] = useState<ContactFormData>(INITIAL_FORM);
   const [state, setState] = useState<ContactFormState>(INITIAL_STATE);
   const [errors, setErrors] = useState<Partial<ContactFormData>>({});
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(
+    "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.haJwZACjZXhwzmn0UKencGFzc2tlecUFFZcl77gAUQts-QVAGVwfg3yaLWOGR52SCb9oPZmHiHPNAL1E_KFG-qUJAOPgZ_drdGFMFT_O5MXvydOJf4AJ9kUUMG-4BFK2gNndJ2lJKUuCwk5zeXvhGg5V_UWJir8vajYyXcDnkLpztJFmu6u16D-M4scG4dSi4GUCfvH9Qnq5dP3U3YcRM2wc67o19Qomx2qSAXLsJFYSUxuqwpu5DOjpUQ4QJfDPqB5YLIpYZ00ZSPMycUtchvPMQDDJGNOARR5LLD1-qLfnQ49o_z2bmDq4tbC8BrfqG52hTV7c27pT3B3Y8OMCpNe8g7UHoE9r6MCYdBPu1WDRpeGnz0UIxzBbr8NygiJY-hdES1JZIAPQVbhxK94lsTFWdct1tNV9hI9ZEHZP1bOfSn_bqLl2rexEYd4nr3TsiU0Un1ME7Kn5ewkEEjBm9fCmArdqey2Leg2TbWYSzBriIWi2xFPxl3lkxBCCEQwLWGqWqGkRsmZFGTPtI5mpJwlFdJp_nN3oK-DtyKA1KpRnq1UYjnViqw6GlDFRFsGv2uWq8ZNR7u2hnc8ec884dM0lVI4TluJVJMqo8GJNvur4E0dpvURyyo8j0wyWvsPoaUpDb7szx_dfDz4IcvXzr3pEdas-5xjrLHnuPTwGNCdghj0lK5PQh6vGtqAzlWtxwELF8EAta2rJgXMI3XGwlWIfsLIzdACw_yd1DZVqT62xlynI_KutZrQappQFyw6M-nZ4DmY2AfD5sZhGXPG8DgvGeHnJ2Zqe0UQLomil5Rmm4bP9RAG-h9geUalxmREZm_tp55G1iXiLbkZkEJLAc4C6lNs8azRj0WI2UjMyrdRdekFOMQrBnMU1GqdBVHr8Y82EbsL_bR5r0n0uteLrN2Jm1msSeW28dnTgpEsKiZWY24djBVQRDT2TfJ_mEY9dboDFYyT_jex2Hr0ftr8a6BtwtweKVfZQpDLQQbYy95_pZOuAq2JKfELdf1D-vmaVd7CUFE1JknIOR9MEeFfBb8If0Ua1NSBXlOhm6g3YB9EAcy-DMCb37m4FKeOdEPDPeyFfK1HMObyPtQ3jRKHOHnAJFPnHEZ36NhW6vdp4qsRZfoDLGqUzcR3nXKBm8L1rtayXCeiTFsIQPYIaiaHbNf2qCdlURlaA0q6OQ2iY_bJVl8GhB7owrxB5oTGBR3xBubTioqjjo5onl9L1Wgb4YjXFDHFelaRBeOwTaxlCTeHYowScxX0IsGCCEkfi1J3EIBlCnQ9ni2hj6N7ZH2hkTLw7gDR-L6-pe1njsy2-dITyggOGQ0gZOaVcN3jTaByidTwKhrskNf6B3XH61p-bD0Bt09YAB1o9IViROYLKUq8XwFBcAWmmX5353K3NeKkZGVriFqy201mNQbXq7uulPYSnOdtY0ra05WlASuzDz5a4Guj_-3Y_ErFr8t19OLsEPYe8wJ4f0XT73cYzP9cr3kOhSOvYvpgHxXLwEkyjt6dA91YvDcel8_UhcpVSWV0uhzJZc7HpzUB86spMKRBm9ad4136mQ_geS0t3j06cw1ePBa4FFX6KLmrClZyRQGJxgNEgCsJL_hUcrrebxHpPwjEDH8Va-Kww2IZ9zZD2jgfJhnlDnDJDw6B_7aNl-sycwbN6-yi1ycULn9T6eW1qFIUKNca6qCBdPUTs-c97K9GRCyv1w295z4_iFBrSvANQ2gGg5CRh7YlGVS3jNfU2VQ0CPpuCdwaACpsjA_HaomtypzgxMGQ5OWGoc2hhcmRfaWTOD3Lqbw.RMfSURm-96Pm6FG4brl-zI6hKV391xdoCTIhOKGZxsQ",
+  );
   const [captchaError, setCaptchaError] = useState(false);
   const [captchaMountKey, setCaptchaMountKey] = useState(0);
 
@@ -66,7 +68,7 @@ export default function ContactForm() {
         body: JSON.stringify({
           access_key: "03838d44-2fee-4e9a-9e9d-83b218a2f1f8",
           botcheck: false,
-          "h-captcha-response": captchaToken,
+          // "h-captcha-response": captchaToken,
           name: form.name,
           email: form.email,
           message: form.message,
@@ -109,27 +111,27 @@ export default function ContactForm() {
   return (
     <section
       id="contact"
-      className="py-20 bg-bg-primary relative overflow-hidden"
+      className="py-12 md:py-16 bg-bg-primary relative overflow-hidden"
       style={{ background: "var(--bg-secondary)" }}
     >
       <div className="max-w-5xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 reveal visible">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 reveal visible">
           {/* Info Side */}
           <div>
             <h2 className="section-label">05. Contact</h2>
-            <h3 className="text-4xl md:text-5xl font-black mb-8 text-white leading-tight">
+            <h3 className="text-3xl md:text-4xl font-black mb-5 text-white leading-tight">
               Get In{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
                 Touch
               </span>
             </h3>
-            <p className="text-text-secondary text-lg leading-relaxed mb-12">
+            <p className="text-text-secondary text-base leading-relaxed mb-8">
               I&apos;m currently open to new opportunities and collaborations.
               Whether you have a question or just want to say hi, I&apos;ll try
               my best to get back to you!
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {[
                 {
                   icon: (
@@ -195,9 +197,9 @@ export default function ContactForm() {
           </div>
 
           {/* Form Side */}
-          <div className="glass-card p-8">
-            <form onSubmit={handleSubmit} noValidate className="space-y-6">
-              <div className="space-y-2">
+          <div className="glass-card p-5 md:p-6 rounded-2xl">
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
+              <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
                   Full Name
                 </label>
@@ -207,10 +209,10 @@ export default function ContactForm() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="John Doe"
-                  className={`w-full bg-white/[0.03] border ${errors.name ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-2xl px-5 py-4 text-white transition-all placeholder:text-text-muted/30`}
+                  className={`w-full bg-white/[0.03] border text-sm ${errors.name ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30`}
                 />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
                   Email Address
                 </label>
@@ -220,46 +222,70 @@ export default function ContactForm() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
-                  className={`w-full bg-white/[0.03] border ${errors.email ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-2xl px-5 py-4 text-white transition-all placeholder:text-text-muted/30`}
+                  className={`w-full bg-white/[0.03] border text-sm ${errors.email ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30`}
                 />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
                   Your Message
                 </label>
                 <textarea
                   name="message"
-                  rows={4}
+                  rows={3}
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project..."
-                  className={`w-full bg-white/[0.03] border ${errors.message ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-2xl px-5 py-4 text-white transition-all placeholder:text-text-muted/30 resize-none`}
+                  className={`w-full bg-white/[0.03] border text-sm min-h-[5.25rem] ${errors.message ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30 resize-none`}
                 />
               </div>
 
-              <div className="space-y-2">
-                <HCaptchaWidget
-                  key={captchaMountKey}
-                  sitekey={WEB3FORMS_HCAPTCHA_SITEKEY}
-                  reCaptchaCompat={false}
-                  theme="dark"
-                  onVerify={(token) => {
-                    setCaptchaToken(token);
-                    setCaptchaError(false);
-                  }}
-                  onExpire={() => setCaptchaToken(null)}
-                />
+              {/* <div className="space-y-1.5 w-full">
+                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
+                  Verification
+                </label>
+                <div
+                  className={`w-full bg-white/[0.03] border text-sm rounded-xl px-4 py-3 transition-all outline-none ${
+                    captchaError
+                      ? "border-red-500/50"
+                      : "border-white/10 focus-within:border-accent-cyan/50 focus-within:bg-white/[0.06]"
+                  }`}
+                >
+                  <div className="contact-form-captcha w-full">
+                    <HCaptchaWidget
+                      key={captchaMountKey}
+                      sitekey={WEB3FORMS_HCAPTCHA_SITEKEY}
+                      reCaptchaCompat={false}
+                      size="normal"
+                      theme={{
+                        palette: {
+                          mode: "dark",
+                          primary: "#00d4ff",
+                          canvas: "#0d1526",
+                          text: "#e2e8f0",
+                          secondary: "#64748b",
+                          inputBorder: "rgba(255, 255, 255, 0.12)",
+                          inputFill: "rgba(255, 255, 255, 0.04)",
+                        },
+                      }}
+                      onVerify={(token) => {
+                        setCaptchaToken(token);
+                        setCaptchaError(false);
+                      }}
+                      onExpire={() => setCaptchaToken(null)}
+                    />
+                  </div>
+                </div>
                 {captchaError && (
-                  <p className="text-red-400 text-xs font-medium">
+                  <p className="text-red-400 text-xs font-medium ml-1">
                     Please complete the verification.
                   </p>
                 )}
-              </div>
+              </div> */}
 
               <button
                 type="submit"
                 disabled={state.status === "loading"}
-                className="btn-primary w-full group overflow-hidden"
+                className="btn-primary w-full group overflow-hidden !py-3 !px-5 text-sm rounded-xl"
               >
                 <span className="flex items-center justify-center gap-3">
                   {state.status === "loading" ? (

@@ -1,9 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import type { ContactFormData, ContactFormState } from "@/types";
 import { PERSONAL } from "@/lib/constants";
 import { motion } from "framer-motion";
+
+/** Web3Forms-provided site key; free plan — see https://docs.web3forms.com/getting-started/customizations/spam-protection/hcaptcha */
+const WEB3FORMS_HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
+
+const HCaptchaWidget = dynamic(() => import("@hcaptcha/react-hcaptcha"), {
+  ssr: false,
+});
 
 const INITIAL_FORM: ContactFormData = { name: "", email: "", message: "" };
 const INITIAL_STATE: ContactFormState = { status: "idle", message: "" };
@@ -12,6 +20,9 @@ export default function ContactForm() {
   const [form, setForm] = useState<ContactFormData>(INITIAL_FORM);
   const [state, setState] = useState<ContactFormState>(INITIAL_STATE);
   const [errors, setErrors] = useState<Partial<ContactFormData>>({});
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState(false);
+  const [captchaMountKey, setCaptchaMountKey] = useState(0);
 
   const validate = (): boolean => {
     const e: Partial<ContactFormData> = {};
@@ -38,6 +49,11 @@ export default function ContactForm() {
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     if (!validate()) return;
+    if (!captchaToken) {
+      setCaptchaError(true);
+      return;
+    }
+    setCaptchaError(false);
     setState({ status: "loading", message: "" });
 
     try {
@@ -49,6 +65,8 @@ export default function ContactForm() {
         },
         body: JSON.stringify({
           access_key: "03838d44-2fee-4e9a-9e9d-83b218a2f1f8",
+          botcheck: false,
+          "h-captcha-response": captchaToken,
           name: form.name,
           email: form.email,
           message: form.message,
@@ -65,14 +83,26 @@ export default function ContactForm() {
           message: "Message sent! I'll get back to you soon.",
         });
         setForm(INITIAL_FORM);
+        setCaptchaToken(null);
+        setCaptchaMountKey((k) => k + 1);
       } else {
-        throw new Error(result.message || "Submission failed");
+        setState({
+          status: "error",
+          message:
+            typeof result.message === "string"
+              ? result.message
+              : "Submission failed.",
+        });
+        setCaptchaToken(null);
+        setCaptchaMountKey((k) => k + 1);
       }
-    } catch (err) {
+    } catch {
       setState({
         status: "error",
         message: "Something went wrong. Please try again later.",
       });
+      setCaptchaToken(null);
+      setCaptchaMountKey((k) => k + 1);
     }
   };
 
@@ -205,6 +235,25 @@ export default function ContactForm() {
                   placeholder="Tell me about your project..."
                   className={`w-full bg-white/[0.03] border ${errors.message ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-2xl px-5 py-4 text-white transition-all placeholder:text-text-muted/30 resize-none`}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <HCaptchaWidget
+                  key={captchaMountKey}
+                  sitekey={WEB3FORMS_HCAPTCHA_SITEKEY}
+                  reCaptchaCompat={false}
+                  theme="dark"
+                  onVerify={(token) => {
+                    setCaptchaToken(token);
+                    setCaptchaError(false);
+                  }}
+                  onExpire={() => setCaptchaToken(null)}
+                />
+                {captchaError && (
+                  <p className="text-red-400 text-xs font-medium">
+                    Please complete the verification.
+                  </p>
+                )}
               </div>
 
               <button

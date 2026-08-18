@@ -46,3 +46,16 @@ export interface SectionProps {
   className?: string;
   children: React.ReactNode;
 }
+
+// ─── Resume Types ─────────────────────────────────────────────────────────────
+export interface EducationItem {
+  institution: string;
+  location: string;
+  period: string;
+  qualification: string;
+}
+
+export interface LanguageItem {
+  name: string;
+  level: string;
+}

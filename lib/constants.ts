@@ -1,3 +1,5 @@
+import type { EducationItem, LanguageItem } from "@/types";
+
 // ─── Personal Information ────────────────────────────────────────────────────
 export const PERSONAL = {
   name: "Anil Kumar",
@@ -145,3 +147,41 @@ export const NAV_LINKS = [
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ] as const;
+
+// ─── Profile Summary ──────────────────────────────────────────────────────────
+export const PROFILE_SUMMARY =
+  "Senior MERN Stack Developer with 4+ years of experience in SaaS, AI, chatbot, and multi-tenant platforms. Delivered 18+ production systems, built 400+ APIs, and designed 15+ backend architectures. Strong in Node.js, NestJS, Next.js, microservices, and real-time applications.";
+
+// ─── Education ────────────────────────────────────────────────────────────────
+export const EDUCATION: EducationItem[] = [
+  {
+    institution: "Choudhary Devi Lal University",
+    location: "Sirsa",
+    period: "2018 – 2021",
+    qualification: "Bachelor of Arts, Geography",
+  },
+  {
+    institution: "KMA Technoware",
+    location: "Hisar",
+    period: "2021 – 2022",
+    qualification: "Software Development Training, Basic Computer Course",
+  },
+];
+
+// ─── Languages ────────────────────────────────────────────────────────────────
+export const LANGUAGES: LanguageItem[] = [
+  { name: "English", level: "Professional" },
+  { name: "Hindi", level: "Native" },
+  { name: "Punjabi", level: "Conversational" },
+];
+
+// ─── Resume Highlights ────────────────────────────────────────────────────────
+export const RESUME_HIGHLIGHTS = [
+  "400+ secure REST APIs built across production systems",
+  "15+ backend architectures designed from scratch",
+  "18+ production projects delivered end-to-end",
+  "Multi-tenant SaaS & AI-agent platform design",
+  "Real-time systems via WebSockets & Socket.IO",
+  "Payment integrations: Stripe, Razorpay",
+  "Communication APIs: Twilio, SendGrid",
+];

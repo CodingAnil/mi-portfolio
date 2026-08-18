@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { ContactFormData, ContactFormState } from "@/types";
 import { PERSONAL } from "@/lib/constants";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 /** Web3Forms-provided site key; free plan — see https://docs.web3forms.com/getting-started/customizations/spam-protection/hcaptcha */
 const WEB3FORMS_HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
@@ -16,6 +16,8 @@ const HCaptchaWidget = dynamic(() => import("@hcaptcha/react-hcaptcha"), {
 const INITIAL_FORM: ContactFormData = { name: "", email: "", message: "" };
 const INITIAL_STATE: ContactFormState = { status: "idle", message: "" };
 const FIELD_ORDER: (keyof ContactFormData)[] = ["name", "email", "message"];
+/** How long the success / error banner stays on screen. */
+const STATUS_TIMEOUT_MS = 6000;
 
 export default function ContactForm() {
   const [form, setForm] = useState<ContactFormData>(INITIAL_FORM);
@@ -55,6 +57,36 @@ export default function ContactForm() {
     if (errors[name as keyof ContactFormData])
       setErrors((prev) => ({ ...prev, [name]: "" }));
   };
+
+  const reduceMotion = useReducedMotion();
+
+  /** Clear the success / error banner once the visitor has had time to read it. */
+  useEffect(() => {
+    if (state.status !== "success" && state.status !== "error") return;
+    const timer = setTimeout(() => setState(INITIAL_STATE), STATUS_TIMEOUT_MS);
+    return () => clearTimeout(timer);
+  }, [state]);
+
+  const bannerMotion = reduceMotion
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.15 },
+      }
+    : {
+        initial: { opacity: 0, y: -4 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -4 },
+        transition: { duration: 0.25 },
+      };
+
+  /** Direct-email fallback, prefilled with what the visitor already typed. */
+  const mailtoFallback = `mailto:${PERSONAL.email}?subject=${encodeURIComponent(
+    form.name.trim()
+      ? `Portfolio enquiry from ${form.name.trim()}`
+      : "Portfolio enquiry",
+  )}&body=${encodeURIComponent(form.message)}`;
 
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -358,11 +390,41 @@ export default function ContactForm() {
                 </span>
               </button>
 
-              {state.status === "success" && (
-                <p className="text-center text-accent-green font-bold text-xs uppercase tracking-widest">
-                  ✓ Message Sent
-                </p>
-              )}
+              <AnimatePresence>
+                {state.status === "success" && (
+                  <motion.p
+                    key="contact-success"
+                    role="status"
+                    {...bannerMotion}
+                    className="rounded-xl border border-accent-green/40 bg-accent-green/[0.07] px-4 py-3 text-center text-accent-green text-xs font-bold"
+                  >
+                    ✓ {state.message}
+                  </motion.p>
+                )}
+
+                {state.status === "error" && (
+                  <motion.div
+                    key="contact-error"
+                    role="alert"
+                    {...bannerMotion}
+                    className="rounded-xl border border-red-500/40 bg-red-500/[0.07] px-4 py-3 space-y-1"
+                  >
+                    <p className="text-red-400 text-xs font-bold">
+                      {state.message}
+                    </p>
+                    <p className="text-text-secondary text-xs">
+                      Your message was not sent.{" "}
+                      <a
+                        href={mailtoFallback}
+                        className="text-accent-cyan font-semibold underline underline-offset-2 hover:text-white transition-colors"
+                      >
+                        Email me directly
+                      </a>{" "}
+                      instead.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
           </div>
         </div>

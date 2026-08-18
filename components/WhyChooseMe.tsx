@@ -189,6 +189,7 @@ const WhyChooseMe: React.FC = () => {
 
   return (
     <section
+      id="why-choose-me"
       ref={sectionRef}
       className="py-20 bg-bg-secondary relative overflow-hidden grid-overlay"
     >

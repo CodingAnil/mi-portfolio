@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { ContactFormData, ContactFormState } from "@/types";
 import { PERSONAL } from "@/lib/constants";
@@ -15,11 +15,17 @@ const HCaptchaWidget = dynamic(() => import("@hcaptcha/react-hcaptcha"), {
 
 const INITIAL_FORM: ContactFormData = { name: "", email: "", message: "" };
 const INITIAL_STATE: ContactFormState = { status: "idle", message: "" };
+const FIELD_ORDER: (keyof ContactFormData)[] = ["name", "email", "message"];
 
 export default function ContactForm() {
   const [form, setForm] = useState<ContactFormData>(INITIAL_FORM);
   const [state, setState] = useState<ContactFormState>(INITIAL_STATE);
   const [errors, setErrors] = useState<Partial<ContactFormData>>({});
+  const fieldRefs = {
+    name: useRef<HTMLInputElement>(null),
+    email: useRef<HTMLInputElement>(null),
+    message: useRef<HTMLTextAreaElement>(null),
+  };
   const [captchaToken, setCaptchaToken] = useState<string | null>(
     "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.haJwZACjZXhwzmn0UKencGFzc2tlecUFFZcl77gAUQts-QVAGVwfg3yaLWOGR52SCb9oPZmHiHPNAL1E_KFG-qUJAOPgZ_drdGFMFT_O5MXvydOJf4AJ9kUUMG-4BFK2gNndJ2lJKUuCwk5zeXvhGg5V_UWJir8vajYyXcDnkLpztJFmu6u16D-M4scG4dSi4GUCfvH9Qnq5dP3U3YcRM2wc67o19Qomx2qSAXLsJFYSUxuqwpu5DOjpUQ4QJfDPqB5YLIpYZ00ZSPMycUtchvPMQDDJGNOARR5LLD1-qLfnQ49o_z2bmDq4tbC8BrfqG52hTV7c27pT3B3Y8OMCpNe8g7UHoE9r6MCYdBPu1WDRpeGnz0UIxzBbr8NygiJY-hdES1JZIAPQVbhxK94lsTFWdct1tNV9hI9ZEHZP1bOfSn_bqLl2rexEYd4nr3TsiU0Un1ME7Kn5ewkEEjBm9fCmArdqey2Leg2TbWYSzBriIWi2xFPxl3lkxBCCEQwLWGqWqGkRsmZFGTPtI5mpJwlFdJp_nN3oK-DtyKA1KpRnq1UYjnViqw6GlDFRFsGv2uWq8ZNR7u2hnc8ec884dM0lVI4TluJVJMqo8GJNvur4E0dpvURyyo8j0wyWvsPoaUpDb7szx_dfDz4IcvXzr3pEdas-5xjrLHnuPTwGNCdghj0lK5PQh6vGtqAzlWtxwELF8EAta2rJgXMI3XGwlWIfsLIzdACw_yd1DZVqT62xlynI_KutZrQappQFyw6M-nZ4DmY2AfD5sZhGXPG8DgvGeHnJ2Zqe0UQLomil5Rmm4bP9RAG-h9geUalxmREZm_tp55G1iXiLbkZkEJLAc4C6lNs8azRj0WI2UjMyrdRdekFOMQrBnMU1GqdBVHr8Y82EbsL_bR5r0n0uteLrN2Jm1msSeW28dnTgpEsKiZWY24djBVQRDT2TfJ_mEY9dboDFYyT_jex2Hr0ftr8a6BtwtweKVfZQpDLQQbYy95_pZOuAq2JKfELdf1D-vmaVd7CUFE1JknIOR9MEeFfBb8If0Ua1NSBXlOhm6g3YB9EAcy-DMCb37m4FKeOdEPDPeyFfK1HMObyPtQ3jRKHOHnAJFPnHEZ36NhW6vdp4qsRZfoDLGqUzcR3nXKBm8L1rtayXCeiTFsIQPYIaiaHbNf2qCdlURlaA0q6OQ2iY_bJVl8GhB7owrxB5oTGBR3xBubTioqjjo5onl9L1Wgb4YjXFDHFelaRBeOwTaxlCTeHYowScxX0IsGCCEkfi1J3EIBlCnQ9ni2hj6N7ZH2hkTLw7gDR-L6-pe1njsy2-dITyggOGQ0gZOaVcN3jTaByidTwKhrskNf6B3XH61p-bD0Bt09YAB1o9IViROYLKUq8XwFBcAWmmX5353K3NeKkZGVriFqy201mNQbXq7uulPYSnOdtY0ra05WlASuzDz5a4Guj_-3Y_ErFr8t19OLsEPYe8wJ4f0XT73cYzP9cr3kOhSOvYvpgHxXLwEkyjt6dA91YvDcel8_UhcpVSWV0uhzJZc7HpzUB86spMKRBm9ad4136mQ_geS0t3j06cw1ePBa4FFX6KLmrClZyRQGJxgNEgCsJL_hUcrrebxHpPwjEDH8Va-Kww2IZ9zZD2jgfJhnlDnDJDw6B_7aNl-sycwbN6-yi1ycULn9T6eW1qFIUKNca6qCBdPUTs-c97K9GRCyv1w295z4_iFBrSvANQ2gGg5CRh7YlGVS3jNfU2VQ0CPpuCdwaACpsjA_HaomtypzgxMGQ5OWGoc2hhcmRfaWTOD3Lqbw.RMfSURm-96Pm6FG4brl-zI6hKV391xdoCTIhOKGZxsQ",
   );
@@ -36,7 +42,9 @@ export default function ContactForm() {
     else if (form.message.trim().length < 2)
       e.message = "Message must be at least 2 characters.";
     setErrors(e);
-    return Object.keys(e).length === 0;
+    const firstInvalid = FIELD_ORDER.find((field) => e[field]);
+    if (firstInvalid) fieldRefs[firstInvalid].current?.focus();
+    return !firstInvalid;
   };
 
   const handleChange = (
@@ -204,39 +212,78 @@ export default function ContactForm() {
                   Full Name
                 </label>
                 <input
+                  ref={fieldRefs.name}
                   name="name"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={
+                    errors.name ? "contact-name-error" : undefined
+                  }
                   type="text"
                   value={form.name}
                   onChange={handleChange}
                   placeholder="John Doe"
                   className={`w-full bg-white/[0.03] border text-sm ${errors.name ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30`}
                 />
+                {errors.name && (
+                  <p
+                    id="contact-name-error"
+                    className="text-red-400 text-xs font-medium ml-1"
+                  >
+                    {errors.name}
+                  </p>
+                )}
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
                   Email Address
                 </label>
                 <input
+                  ref={fieldRefs.email}
                   name="email"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={
+                    errors.email ? "contact-email-error" : undefined
+                  }
                   type="email"
                   value={form.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
                   className={`w-full bg-white/[0.03] border text-sm ${errors.email ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30`}
                 />
+                {errors.email && (
+                  <p
+                    id="contact-email-error"
+                    className="text-red-400 text-xs font-medium ml-1"
+                  >
+                    {errors.email}
+                  </p>
+                )}
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
                   Your Message
                 </label>
                 <textarea
+                  ref={fieldRefs.message}
                   name="message"
+                  aria-invalid={!!errors.message}
+                  aria-describedby={
+                    errors.message ? "contact-message-error" : undefined
+                  }
                   rows={3}
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project..."
                   className={`w-full bg-white/[0.03] border text-sm min-h-[5.25rem] ${errors.message ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30 resize-none`}
                 />
+                {errors.message && (
+                  <p
+                    id="contact-message-error"
+                    className="text-red-400 text-xs font-medium ml-1"
+                  >
+                    {errors.message}
+                  </p>
+                )}
               </div>
 
               {/* <div className="space-y-1.5 w-full">

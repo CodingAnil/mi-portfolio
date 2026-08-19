@@ -62,9 +62,9 @@ export default function Hero() {
       </div>
       */}
 
-      {/* Ambient AI clip — fills the right half, behind the hero content */}
+      {/* Ambient AI clip — hero background, subject anchored right */}
       <div
-        className="absolute inset-y-0 right-0 w-1/2 z-0 hidden lg:flex items-center justify-end overflow-hidden"
+        className="absolute inset-0 z-0 hidden lg:block overflow-hidden"
         aria-hidden="true"
       >
         <HeroVideo />

@@ -119,7 +119,7 @@ export const PROJECTS = [
     description:
       "Built user and admin panels complete with booking workflows, calendar management, and payment processing integrations.",
     tags: ["Next.js", "Express", "PostgreSQL", "Stripe"],
-    featured: false,
+    featured: true,
   },
   {
     title: "Skill Analyzer",

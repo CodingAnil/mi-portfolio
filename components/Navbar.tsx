@@ -16,12 +16,19 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const handleNav = (href: string) => {
+  const isHome = pathname === "/";
+
+  /**
+   * On the home page, scroll smoothly to the section. Anywhere else, let the
+   * link navigate to "/#section" so the browser lands on the right anchor.
+   */
+  const handleNav = (ev: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setMobileOpen(false);
-    if (href.startsWith("#")) {
-      const el = document.getElementById(href.replace("#", ""));
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (!isHome) return;
+    const el = document.getElementById(href.replace("#", ""));
+    if (!el) return;
+    ev.preventDefault();
+    el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -62,22 +69,22 @@ export default function Navbar() {
           <ul className="hidden md:flex items-center gap-8" role="list">
             {NAV_LINKS.map((item) => (
               <li key={item.href}>
-                <button
-                  onClick={() => handleNav(item.href)}
+                <Link
+                  href={`/${item.href}`}
+                  onClick={(ev) => handleNav(ev, item.href)}
                   className="text-xs font-bold uppercase tracking-widest text-text-secondary hover:text-accent-cyan transition-colors"
                 >
                   {item.label}
-                </button>
+                </Link>
               </li>
             ))}
             <li>
-              <a
-                href={PERSONAL.resumeUrl}
-                download
+              <Link
+                href="/resume"
                 className="btn-ghost text-[10px] px-4 py-2 uppercase tracking-widest font-black"
               >
                 Resume
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -122,22 +129,23 @@ export default function Navbar() {
             >
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
-                  <button
-                    onClick={() => handleNav(item.href)}
-                    className="text-sm font-bold uppercase tracking-[0.2em] text-text-secondary hover:text-accent-cyan py-2 transition-colors"
+                  <Link
+                    href={`/${item.href}`}
+                    onClick={(ev) => handleNav(ev, item.href)}
+                    className="block text-sm font-bold uppercase tracking-[0.2em] text-text-secondary hover:text-accent-cyan py-2 transition-colors"
                   >
                     {item.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
               <li className="pt-4">
-                <a
-                  href={PERSONAL.resumeUrl}
-                  download
-                  className="btn-primary w-full justify-center text-xs"
+                <Link
+                  href="/resume"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-primary block w-full text-center text-xs"
                 >
-                  Download Resume
-                </a>
+                  View Resume
+                </Link>
               </li>
             </ul>
           </motion.div>

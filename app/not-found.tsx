@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PERSONAL } from "@/lib/constants";
+import { NAV_LINKS, PERSONAL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -37,16 +37,10 @@ export default function NotFound() {
 
         <nav aria-label="Portfolio sections" className="mt-12">
           <ul className="flex flex-wrap gap-x-6 gap-y-3 justify-center">
-            {[
-              { label: "About", href: "/#about" },
-              { label: "Skills", href: "/#skills" },
-              { label: "Experience", href: "/#experience" },
-              { label: "Projects", href: "/#projects" },
-              { label: "Contact", href: "/#contact" },
-            ].map((link) => (
+            {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={link.href}
+                  href={`/${link.href}`}
                   className="text-xs font-bold uppercase tracking-widest text-text-muted hover:text-accent-cyan transition-colors"
                 >
                   {link.label}

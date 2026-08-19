@@ -5,7 +5,11 @@ import { motion, Variants } from "framer-motion";
 import { PERSONAL } from "@/lib/constants";
 import dynamic from "next/dynamic";
 
-const Owl = dynamic(() => import("./Owl"), { ssr: false });
+// Owl hero mascot — kept for reference, replaced by the AI head hologram.
+// const Owl = dynamic(() => import("./Owl"), { ssr: false });
+// Canvas head hologram — kept for reference, replaced by the AI background clip.
+// const AiHead = dynamic(() => import("./AiHead"), { ssr: false });
+const HeroVideo = dynamic(() => import("./HeroVideo"), { ssr: false });
 
 const container: Variants = {
   hidden: {},
@@ -40,12 +44,30 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Owl — top right corner */}
+      {/* Owl — top right corner (replaced by <AiHead />, kept for reference)
       <div
         className="absolute top-24 right-8 md:right-16 z-20 hidden sm:block"
         aria-hidden="true"
       >
         <Owl />
+      </div>
+      */}
+
+      {/* AI head hologram — kept for reference
+      <div
+        className="absolute top-20 right-4 md:right-12 z-20 hidden sm:block"
+        aria-hidden="true"
+      >
+        <AiHead />
+      </div>
+      */}
+
+      {/* Ambient AI clip — fills the right half, behind the hero content */}
+      <div
+        className="absolute inset-y-0 right-0 w-1/2 z-0 hidden lg:flex items-center justify-end overflow-hidden"
+        aria-hidden="true"
+      >
+        <HeroVideo />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 w-full">

@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "Resume",
   description:
     "Resume of Anil Kumar — Senior MERN Stack Developer with 4+ years of experience building SaaS, AI, and multi-tenant platforms.",
+  alternates: {
+    canonical: "/resume",
+  },
 };
 
 const CONTACT_ROWS = [

@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://anilkumar.dev";
+/**
+ * Canonical origin for this site. Set NEXT_PUBLIC_SITE_URL in the deploy
+ * environment; the fallback is only used for local builds.
+ */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://anilkumar.dev";
+
+const baseUrl = SITE_URL;
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -28,6 +35,9 @@ export const defaultMetadata: Metadata = {
     "India",
   ],
   authors: [{ name: "Anil Kumar", url: baseUrl }],
+  alternates: {
+    canonical: "/",
+  },
   creator: "Anil Kumar",
   openGraph: {
     type: "website",

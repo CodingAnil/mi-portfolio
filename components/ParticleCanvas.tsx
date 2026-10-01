@@ -26,7 +26,7 @@ export default function ParticleCanvas() {
     let H = (canvas.height = window.innerHeight);
     let animId: number;
 
-    const COUNT = Math.min(60, Math.floor((W * H) / 20000));
+    const COUNT = Math.min(36, Math.floor((W * H) / 32000));
     const particles: Particle[] = Array.from({ length: COUNT }, () => ({
       x: Math.random() * W,
       y: Math.random() * H,

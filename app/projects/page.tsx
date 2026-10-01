@@ -17,16 +17,12 @@ export default function ProjectsPage() {
   const others = PROJECTS.filter((project) => !project.featured);
 
   return (
-    <div className="pt-28 pb-24 bg-bg-primary">
-      <div className="max-w-5xl mx-auto px-6 lg:px-10">
-        {/* ── Page header ─────────────────────────────────────────── */}
+    <div className="pt-8 pb-24 bg-bg-primary">
+      <div className="page-container">
         <header className="mb-16 text-center">
-          <p className="section-label mx-auto">Portfolio</p>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-tight text-white">
-            All{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
-              Projects
-            </span>
+          <p className="section-eyebrow justify-center mb-4">Portfolio</p>
+          <h1 className="section-title">
+            All <span className="text-gradient-accent">projects</span>
           </h1>
           <p className="text-text-secondary text-lg leading-relaxed mt-6 max-w-2xl mx-auto">
             Production systems I have designed and delivered — AI agent

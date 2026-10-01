@@ -10,7 +10,7 @@ import ContactForm from "@/components/ContactForm";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col bg-bg-primary">
+    <div className="flex flex-col bg-bg-primary relative">
       <Hero />
       <About />
       <Skills />

@@ -4,28 +4,35 @@
 
 @layer base {
   :root {
-    --bg-primary: #0a0f1e;
-    --bg-secondary: #0f1629;
-    --bg-surface: #131c35;
-    --bg-card: #0d1526;
-    --accent-cyan: #00d4ff;
-    --accent-purple: #7c3aed;
+    --bg-primary: #05060a;
+    --bg-secondary: #0a0c12;
+    --bg-surface: #0f1219;
+    --bg-card: #0c0f16;
+    --bg-elevated: #12161f;
+    --accent-cyan: #38bdf8;
+    --accent-purple: #818cf8;
     --accent-blue: #3b82f6;
-    --accent-green: #10d98a;
-    --text-primary: #e2e8f0;
+    --accent-green: #34d399;
+    --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
-    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-strong: rgba(255, 255, 255, 0.12);
+    --glow-accent: rgba(56, 189, 248, 0.15);
   }
 
   html {
     scroll-behavior: smooth;
   }
 
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
@@ -83,22 +90,64 @@
     transform: translateX(0);
   }
 
+  .page-container {
+    @apply max-w-6xl mx-auto px-5 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-28;
+  }
+
+  .text-gradient-accent {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400;
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-cyan;
+  }
+
+  .section-eyebrow::before {
+    content: "";
+    @apply w-1.5 h-1.5 rounded-full bg-accent-cyan/80;
+    box-shadow: 0 0 12px var(--glow-accent);
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-white leading-[1.15];
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-text-muted/40;
+  }
+
+  .input-field:focus {
+    @apply border-accent-cyan/40 bg-white/[0.05];
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.08);
+  }
+
   /* ── Premium cards ── */
   .glass-card {
-    background: rgba(13, 21, 38, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 20px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    transition:
+      border-color 0.35s ease,
+      box-shadow 0.35s ease,
+      transform 0.35s ease;
   }
 
   .glass-card:hover {
-    border-color: rgba(0, 212, 255, 0.25);
+    border-color: rgba(56, 189, 248, 0.22);
     box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.4),
-      0 0 40px rgba(0, 212, 255, 0.08);
-    transform: translateY(-4px);
+      0 16px 48px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(56, 189, 248, 0.06);
+    transform: translateY(-2px);
   }
 
   .why-card {
@@ -134,24 +183,28 @@
 
   /* ── Buttons ── */
   .btn-primary {
-    @apply relative overflow-hidden font-bold rounded-xl px-8 py-3.5 transition-all duration-300;
-    background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
-    color: #fff;
-  }
-
-  .btn-primary::before {
-    content: "";
-    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, #7c3aed 0%, #00d4ff 100%);
-  }
-
-  .btn-primary:hover::before {
-    opacity: 1;
+    @apply relative inline-flex items-center justify-center font-semibold rounded-xl px-6 py-3 text-sm transition-all duration-300;
+    background: linear-gradient(180deg, #38bdf8 0%, #0ea5e9 100%);
+    color: #041018;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.25) inset,
+      0 8px 24px rgba(14, 165, 233, 0.22);
   }
 
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+    transform: translateY(-1px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.3) inset,
+      0 12px 32px rgba(14, 165, 233, 0.28);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-primary:disabled {
+    @apply opacity-60 cursor-not-allowed;
+    transform: none;
   }
 
   .btn-primary span {
@@ -159,23 +212,32 @@
   }
 
   .btn-ghost {
-    @apply px-6 py-2.5 rounded-xl font-semibold transition-all duration-300;
-    background: rgba(0, 212, 255, 0.08);
-    color: var(--accent-cyan);
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    @apply px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
   }
 
   .btn-ghost:hover {
-    background: rgba(0, 212, 255, 0.15);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(56, 189, 248, 0.35);
+    color: var(--accent-cyan);
   }
 
   /* ── Grid Overlay ── */
   .grid-overlay {
     background-image:
-      linear-gradient(to right, rgba(0, 212, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 212, 255, 0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 100%);
+  }
+
+  .ai-ambient {
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 50% 40% at 85% 15%, rgba(56, 189, 248, 0.08), transparent 55%),
+      radial-gradient(ellipse 40% 35% at 10% 80%, rgba(129, 140, 248, 0.06), transparent 50%);
   }
 
   /* ── Availability ── */
@@ -195,28 +257,26 @@
 
   /* ── Skill Badges ── */
   .skill-badge {
-    @apply px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 cursor-default;
+    @apply px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-200 cursor-default;
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text-secondary);
   }
 
   .skill-badge:hover {
-    background: rgba(0, 212, 255, 0.08);
-    border-color: rgba(0, 212, 255, 0.3);
-    color: var(--accent-cyan);
-    transform: translateY(-2px);
-    box-shadow:
-      0 10px 20px rgba(0, 0, 0, 0.2),
-      0 0 15px rgba(0, 212, 255, 0.1);
+    background: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.25);
+    color: var(--text-primary);
   }
 
-  /* ── Section Label ── */
   .section-label {
-    @apply inline-block text-[10px] font-black uppercase tracking-[0.4em] mb-4 py-1.5 px-4 rounded-full;
-    background: rgba(0, 212, 255, 0.06);
-    border: 1px solid rgba(0, 212, 255, 0.15);
-    color: var(--accent-cyan);
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-cyan mb-4;
+  }
+
+  .section-label::before {
+    content: "";
+    @apply w-1.5 h-1.5 rounded-full bg-accent-cyan/80;
+    box-shadow: 0 0 12px var(--glow-accent);
   }
 
   /* ── Contact: hCaptcha centered inside glass field (matches input row width) ── */
@@ -257,6 +317,35 @@
   height: 100%;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Soft cursor glow — single point only (no trail cursors) */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 45;
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.95) 0%,
+    rgba(56, 189, 248, 0.35) 35%,
+    transparent 70%
+  );
+  box-shadow:
+    0 0 16px rgba(56, 189, 248, 0.55),
+    0 0 32px rgba(56, 189, 248, 0.2);
+  will-change: transform, left, top;
+}
+
+@media (pointer: coarse) {
+  .cursor-glow {
+    display: none;
+  }
 }
 
 /* ── Print: /resume renders as a clean, ink-friendly document ─────────────── */

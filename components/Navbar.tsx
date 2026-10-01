@@ -5,23 +5,23 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PERSONAL, NAV_LINKS } from "@/lib/constants";
 
+/** Matches `page-container` horizontal inset so the nav card aligns with page content. */
+const NAV_INSET = "px-5 sm:px-6 lg:px-8";
+
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 30);
+    const handler = () => setScrolled(window.scrollY > 24);
+    handler();
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
   const isHome = pathname === "/";
 
-  /**
-   * On the home page, scroll smoothly to the section. Anywhere else, let the
-   * link navigate to "/#section" so the browser lands on the right anchor.
-   */
   const handleNav = (ev: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setMobileOpen(false);
     if (!isHome) return;
@@ -33,118 +33,112 @@ export default function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-bg-primary/70 backdrop-blur-xl border-b border-white/[0.05] py-3"
-          : "bg-transparent py-5"
-      }`}
+      initial={false}
+      className={`fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 ${NAV_INSET}`}
     >
-      <div className="max-w-5xl mx-auto px-6">
-        <nav className="flex items-center justify-between">
-          {/* Brand */}
+      <div
+        className={`mx-auto w-full max-w-6xl rounded-2xl border transition-all duration-300 ${
+          scrolled
+            ? "border-white/10 bg-bg-card/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)] px-4 sm:px-5 py-2.5"
+            : "border-transparent bg-transparent px-3 sm:px-4 py-2"
+        }`}
+      >
+        <nav
+          className="flex items-center justify-between gap-4"
+          aria-label="Main"
+        >
           <Link
             href="/"
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-3 group min-w-0"
             aria-label="Home"
           >
-            <div className="w-10 h-10 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center transition-all group-hover:bg-accent-cyan group-hover:text-white group-hover:shadow-glow-cyan">
-              <span className="font-black text-accent-cyan group-hover:text-white text-lg">
+            <div className="w-9 h-9 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center transition-colors group-hover:border-accent-cyan/40">
+              <span className="font-display font-bold text-accent-cyan text-sm">
                 A
               </span>
             </div>
-            <div className="flex flex-col">
-              <span className="font-black text-white text-sm tracking-tight leading-tight">
+            <div className="flex flex-col min-w-0">
+              <span className="font-display font-semibold text-white text-sm tracking-tight truncate">
                 {PERSONAL.name}
               </span>
-              <span className="text-[10px] text-text-muted font-bold uppercase tracking-widest leading-none mt-0.5">
+              <span className="text-[10px] text-text-muted font-medium truncate hidden sm:block">
                 {PERSONAL.title}
               </span>
             </div>
           </Link>
 
-          {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-8" role="list">
+          <ul className="hidden md:flex items-center gap-1" role="list">
             {NAV_LINKS.map((item) => (
               <li key={item.href}>
                 <Link
                   href={`/${item.href}`}
                   onClick={(ev) => handleNav(ev, item.href)}
-                  className="text-xs font-bold uppercase tracking-widest text-text-secondary hover:text-accent-cyan transition-colors"
+                  className="px-3.5 py-2 rounded-lg text-xs font-medium text-text-secondary hover:text-white hover:bg-white/[0.05] transition-colors"
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/resume"
-                className="btn-ghost text-[10px] px-4 py-2 uppercase tracking-widest font-black"
-              >
-                Resume
+            <li className="ml-2">
+              <Link href="/resume" className="btn-primary !py-2 !px-4 text-xs">
+                <span>Resume</span>
               </Link>
             </li>
           </ul>
 
-          {/* Mobile hamburger */}
           <button
+            type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-white/5 transition-colors"
+            className="md:hidden flex flex-col gap-1.5 p-2.5 rounded-lg border border-white/10 hover:bg-white/[0.04] transition-colors"
             aria-expanded={mobileOpen}
             aria-label="Toggle menu"
           >
             <motion.span
-              animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              className="block w-5 h-0.5 bg-accent-cyan"
+              animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              className="block w-5 h-0.5 bg-text-primary"
             />
             <motion.span
               animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="block w-5 h-0.5 bg-accent-cyan"
+              className="block w-5 h-0.5 bg-text-primary"
             />
             <motion.span
               animate={
-                mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
+                mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }
               }
-              className="block w-5 h-0.5 bg-accent-cyan"
+              className="block w-5 h-0.5 bg-text-primary"
             />
           </button>
         </nav>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden overflow-hidden bg-bg-primary/95 backdrop-blur-2xl border-t border-white/[0.05]"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden mt-2 mx-auto w-full max-w-6xl rounded-2xl border border-white/10 bg-bg-card/95 backdrop-blur-xl overflow-hidden"
           >
-            <ul
-              className="px-6 py-8 flex flex-col gap-5 text-center"
-              role="list"
-            >
+            <ul className="px-4 py-5 flex flex-col gap-1" role="list">
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={`/${item.href}`}
                     onClick={(ev) => handleNav(ev, item.href)}
-                    className="block text-sm font-bold uppercase tracking-[0.2em] text-text-secondary hover:text-accent-cyan py-2 transition-colors"
+                    className="block rounded-lg px-3 py-3 text-sm font-medium text-text-secondary hover:text-white hover:bg-white/[0.05] transition-colors"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
-              <li className="pt-4">
+              <li className="pt-3">
                 <Link
                   href="/resume"
                   onClick={() => setMobileOpen(false)}
-                  className="btn-primary block w-full text-center text-xs"
+                  className="btn-primary block w-full text-center text-sm"
                 >
-                  View Resume
+                  <span>View resume</span>
                 </Link>
               </li>
             </ul>

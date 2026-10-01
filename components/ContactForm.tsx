@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { ContactFormData, ContactFormState } from "@/types";
 import { PERSONAL } from "@/lib/constants";
+import SectionHeader from "@/components/SectionHeader";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 /** Web3Forms-provided site key; free plan — see https://docs.web3forms.com/getting-started/customizations/spam-protection/hcaptcha */
@@ -28,9 +29,7 @@ export default function ContactForm() {
     email: useRef<HTMLInputElement>(null),
     message: useRef<HTMLTextAreaElement>(null),
   };
-  const [captchaToken, setCaptchaToken] = useState<string | null>(
-    "P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.haJwZACjZXhwzmn0UKencGFzc2tlecUFFZcl77gAUQts-QVAGVwfg3yaLWOGR52SCb9oPZmHiHPNAL1E_KFG-qUJAOPgZ_drdGFMFT_O5MXvydOJf4AJ9kUUMG-4BFK2gNndJ2lJKUuCwk5zeXvhGg5V_UWJir8vajYyXcDnkLpztJFmu6u16D-M4scG4dSi4GUCfvH9Qnq5dP3U3YcRM2wc67o19Qomx2qSAXLsJFYSUxuqwpu5DOjpUQ4QJfDPqB5YLIpYZ00ZSPMycUtchvPMQDDJGNOARR5LLD1-qLfnQ49o_z2bmDq4tbC8BrfqG52hTV7c27pT3B3Y8OMCpNe8g7UHoE9r6MCYdBPu1WDRpeGnz0UIxzBbr8NygiJY-hdES1JZIAPQVbhxK94lsTFWdct1tNV9hI9ZEHZP1bOfSn_bqLl2rexEYd4nr3TsiU0Un1ME7Kn5ewkEEjBm9fCmArdqey2Leg2TbWYSzBriIWi2xFPxl3lkxBCCEQwLWGqWqGkRsmZFGTPtI5mpJwlFdJp_nN3oK-DtyKA1KpRnq1UYjnViqw6GlDFRFsGv2uWq8ZNR7u2hnc8ec884dM0lVI4TluJVJMqo8GJNvur4E0dpvURyyo8j0wyWvsPoaUpDb7szx_dfDz4IcvXzr3pEdas-5xjrLHnuPTwGNCdghj0lK5PQh6vGtqAzlWtxwELF8EAta2rJgXMI3XGwlWIfsLIzdACw_yd1DZVqT62xlynI_KutZrQappQFyw6M-nZ4DmY2AfD5sZhGXPG8DgvGeHnJ2Zqe0UQLomil5Rmm4bP9RAG-h9geUalxmREZm_tp55G1iXiLbkZkEJLAc4C6lNs8azRj0WI2UjMyrdRdekFOMQrBnMU1GqdBVHr8Y82EbsL_bR5r0n0uteLrN2Jm1msSeW28dnTgpEsKiZWY24djBVQRDT2TfJ_mEY9dboDFYyT_jex2Hr0ftr8a6BtwtweKVfZQpDLQQbYy95_pZOuAq2JKfELdf1D-vmaVd7CUFE1JknIOR9MEeFfBb8If0Ua1NSBXlOhm6g3YB9EAcy-DMCb37m4FKeOdEPDPeyFfK1HMObyPtQ3jRKHOHnAJFPnHEZ36NhW6vdp4qsRZfoDLGqUzcR3nXKBm8L1rtayXCeiTFsIQPYIaiaHbNf2qCdlURlaA0q6OQ2iY_bJVl8GhB7owrxB5oTGBR3xBubTioqjjo5onl9L1Wgb4YjXFDHFelaRBeOwTaxlCTeHYowScxX0IsGCCEkfi1J3EIBlCnQ9ni2hj6N7ZH2hkTLw7gDR-L6-pe1njsy2-dITyggOGQ0gZOaVcN3jTaByidTwKhrskNf6B3XH61p-bD0Bt09YAB1o9IViROYLKUq8XwFBcAWmmX5353K3NeKkZGVriFqy201mNQbXq7uulPYSnOdtY0ra05WlASuzDz5a4Guj_-3Y_ErFr8t19OLsEPYe8wJ4f0XT73cYzP9cr3kOhSOvYvpgHxXLwEkyjt6dA91YvDcel8_UhcpVSWV0uhzJZc7HpzUB86spMKRBm9ad4136mQ_geS0t3j06cw1ePBa4FFX6KLmrClZyRQGJxgNEgCsJL_hUcrrebxHpPwjEDH8Va-Kww2IZ9zZD2jgfJhnlDnDJDw6B_7aNl-sycwbN6-yi1ycULn9T6eW1qFIUKNca6qCBdPUTs-c97K9GRCyv1w295z4_iFBrSvANQ2gGg5CRh7YlGVS3jNfU2VQ0CPpuCdwaACpsjA_HaomtypzgxMGQ5OWGoc2hhcmRfaWTOD3Lqbw.RMfSURm-96Pm6FG4brl-zI6hKV391xdoCTIhOKGZxsQ",
-  );
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState(false);
   const [captchaMountKey, setCaptchaMountKey] = useState(0);
 
@@ -108,7 +107,7 @@ export default function ContactForm() {
         body: JSON.stringify({
           access_key: "03838d44-2fee-4e9a-9e9d-83b218a2f1f8",
           botcheck: false,
-          // "h-captcha-response": captchaToken,
+          "h-captcha-response": captchaToken,
           name: form.name,
           email: form.email,
           message: form.message,
@@ -148,30 +147,28 @@ export default function ContactForm() {
     }
   };
 
+  const fieldClass = (hasError: boolean) =>
+    `input-field ${hasError ? "!border-red-500/50" : ""}`;
+
   return (
     <section
       id="contact"
-      className="py-12 md:py-16 bg-bg-primary relative overflow-hidden"
-      style={{ background: "var(--bg-secondary)" }}
+      className="section-padding relative overflow-hidden bg-bg-secondary/40 border-t border-white/[0.04]"
     >
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 reveal visible">
-          {/* Info Side */}
+      <div className="page-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <div>
-            <h2 className="section-label">05. Contact</h2>
-            <h3 className="text-3xl md:text-4xl font-black mb-5 text-white leading-tight">
-              Get In{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
-                Touch
-              </span>
-            </h3>
-            <p className="text-text-secondary text-base leading-relaxed mb-8">
-              I&apos;m currently open to new opportunities and collaborations.
-              Whether you have a question or just want to say hi, I&apos;ll try
-              my best to get back to you!
-            </p>
+            <SectionHeader
+              eyebrow="06 · Contact"
+              title={
+                <>
+                  Get in <span className="text-gradient-accent">touch</span>
+                </>
+              }
+              description="Open to opportunities and collaborations. Questions, project ideas, or a quick hello — I'll do my best to reply."
+            />
 
-            <div className="space-y-4">
+            <div className="space-y-3 -mt-4">
               {[
                 {
                   icon: (
@@ -212,9 +209,9 @@ export default function ContactForm() {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-6 group transition-colors"
+                  className="flex items-center gap-4 group rounded-xl border border-transparent hover:border-white/[0.06] hover:bg-white/[0.02] px-3 py-2.5 transition-colors"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-accent-cyan group-hover:bg-accent-cyan group-hover:text-white transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-accent-cyan group-hover:border-accent-cyan/30 transition-colors">
                     <svg
                       className="w-6 h-6"
                       fill="none"
@@ -227,7 +224,7 @@ export default function ContactForm() {
                   <a
                     href={item.href}
                     target={item.value === PERSONAL.email ? "_self" : "_blank"}
-                    className="text-white font-bold group-hover:text-accent-cyan transition-colors"
+                    className="text-sm font-medium text-text-primary group-hover:text-accent-cyan transition-colors"
                   >
                     {item.value}
                   </a>
@@ -237,13 +234,17 @@ export default function ContactForm() {
           </div>
 
           {/* Form Side */}
-          <div className="glass-card p-5 md:p-6 rounded-2xl">
+          <div className="glass-card p-6 md:p-7">
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
-                  Full Name
+                <label
+                  htmlFor="contact-name"
+                  className="text-xs font-medium text-text-secondary"
+                >
+                  Full name
                 </label>
                 <input
+                  id="contact-name"
                   ref={fieldRefs.name}
                   name="name"
                   aria-invalid={!!errors.name}
@@ -254,7 +255,7 @@ export default function ContactForm() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="John Doe"
-                  className={`w-full bg-white/[0.03] border text-sm ${errors.name ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30`}
+                  className={fieldClass(!!errors.name)}
                 />
                 {errors.name && (
                   <p
@@ -266,10 +267,14 @@ export default function ContactForm() {
                 )}
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
-                  Email Address
+                <label
+                  htmlFor="contact-email"
+                  className="text-xs font-medium text-text-secondary"
+                >
+                  Email address
                 </label>
                 <input
+                  id="contact-email"
                   ref={fieldRefs.email}
                   name="email"
                   aria-invalid={!!errors.email}
@@ -280,7 +285,7 @@ export default function ContactForm() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
-                  className={`w-full bg-white/[0.03] border text-sm ${errors.email ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30`}
+                  className={fieldClass(!!errors.email)}
                 />
                 {errors.email && (
                   <p
@@ -292,10 +297,14 @@ export default function ContactForm() {
                 )}
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
-                  Your Message
+                <label
+                  htmlFor="contact-message"
+                  className="text-xs font-medium text-text-secondary"
+                >
+                  Message
                 </label>
                 <textarea
+                  id="contact-message"
                   ref={fieldRefs.message}
                   name="message"
                   aria-invalid={!!errors.message}
@@ -306,7 +315,7 @@ export default function ContactForm() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project..."
-                  className={`w-full bg-white/[0.03] border text-sm min-h-[5.25rem] ${errors.message ? "border-red-500/50" : "border-white/10"} focus:border-accent-cyan/50 focus:bg-white/[0.06] outline-none rounded-xl px-4 py-2.5 text-white transition-all placeholder:text-text-muted/30 resize-none`}
+                  className={`${fieldClass(!!errors.message)} min-h-[5.25rem] resize-none`}
                 />
                 {errors.message && (
                   <p
@@ -318,15 +327,15 @@ export default function ContactForm() {
                 )}
               </div>
 
-              {/* <div className="space-y-1.5 w-full">
-                <label className="text-[10px] font-black uppercase tracking-widest text-text-muted ml-1">
+              <div className="space-y-1.5 w-full">
+                <span className="text-xs font-medium text-text-secondary">
                   Verification
-                </label>
+                </span>
                 <div
-                  className={`w-full bg-white/[0.03] border text-sm rounded-xl px-4 py-3 transition-all outline-none ${
+                  className={`rounded-xl border px-3 py-3 transition-all ${
                     captchaError
-                      ? "border-red-500/50"
-                      : "border-white/10 focus-within:border-accent-cyan/50 focus-within:bg-white/[0.06]"
+                      ? "border-red-500/50 bg-red-500/[0.03]"
+                      : "border-white/10 bg-white/[0.02] focus-within:border-accent-cyan/40"
                   }`}
                 >
                   <div className="contact-form-captcha w-full">
@@ -334,13 +343,13 @@ export default function ContactForm() {
                       key={captchaMountKey}
                       sitekey={WEB3FORMS_HCAPTCHA_SITEKEY}
                       reCaptchaCompat={false}
-                      size="normal"
+                      size="compact"
                       theme={{
                         palette: {
                           mode: "dark",
-                          primary: "#00d4ff",
-                          canvas: "#0d1526",
-                          text: "#e2e8f0",
+                          primary: "#38bdf8",
+                          canvas: "#0c0f16",
+                          text: "#f1f5f9",
                           secondary: "#64748b",
                           inputBorder: "rgba(255, 255, 255, 0.12)",
                           inputFill: "rgba(255, 255, 255, 0.04)",
@@ -355,16 +364,16 @@ export default function ContactForm() {
                   </div>
                 </div>
                 {captchaError && (
-                  <p className="text-red-400 text-xs font-medium ml-1">
+                  <p className="text-red-400 text-xs font-medium">
                     Please complete the verification.
                   </p>
                 )}
-              </div> */}
+              </div>
 
               <button
                 type="submit"
                 disabled={state.status === "loading"}
-                className="btn-primary w-full group overflow-hidden !py-3 !px-5 text-sm rounded-xl"
+                className="btn-primary w-full group"
               >
                 <span className="flex items-center justify-center gap-3">
                   {state.status === "loading" ? (

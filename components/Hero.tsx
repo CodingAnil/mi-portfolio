@@ -5,22 +5,18 @@ import { motion, Variants } from "framer-motion";
 import { PERSONAL } from "@/lib/constants";
 import dynamic from "next/dynamic";
 
-// Owl hero mascot — kept for reference, replaced by the AI head hologram.
-// const Owl = dynamic(() => import("./Owl"), { ssr: false });
-// Canvas head hologram — kept for reference, replaced by the AI background clip.
-// const AiHead = dynamic(() => import("./AiHead"), { ssr: false });
 const HeroVideo = dynamic(() => import("./HeroVideo"), { ssr: false });
 
 const container: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 const item: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 1, y: 0 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -31,133 +27,102 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen flex items-center pt-20 grid-overlay overflow-hidden"
+      className="relative min-h-[92vh] flex items-center pt-24 pb-16 overflow-hidden"
       aria-label="Hero – Introduction"
     >
-      {/* Background glow behind name */}
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%)",
-        }}
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 ai-ambient" aria-hidden="true" />
+      <div className="absolute inset-0 grid-overlay opacity-80" aria-hidden="true" />
 
-      {/* Owl — top right corner (replaced by <AiHead />, kept for reference)
-      <div
-        className="absolute top-24 right-8 md:right-16 z-20 hidden sm:block"
-        aria-hidden="true"
-      >
-        <Owl />
-      </div>
-      */}
-
-      {/* AI head hologram — kept for reference
-      <div
-        className="absolute top-20 right-4 md:right-12 z-20 hidden sm:block"
-        aria-hidden="true"
-      >
-        <AiHead />
-      </div>
-      */}
-
-      {/* Ambient AI clip — hero background, subject anchored right */}
       <div
         className="absolute inset-0 z-0 hidden lg:block overflow-hidden"
         aria-hidden="true"
       >
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-primary via-bg-primary/85 to-bg-primary/20 z-[1]" />
         <HeroVideo />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 w-full">
+      <div className="relative z-10 page-container w-full">
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={false}
           animate="visible"
-          className="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16"
+          className="flex flex-col lg:flex-row items-center lg:items-center gap-12 lg:gap-16"
         >
-          {/* Profile image with brand styling */}
           <motion.div variants={item} className="flex-shrink-0 relative">
-            <div className="relative group">
-              <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-white/10 shadow-2xl transition-all duration-500 group-hover:border-accent-cyan/30 group-hover:shadow-glow-cyan">
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-accent-cyan/30 to-accent-purple/20 blur-md opacity-60" />
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border border-white/15 ring-1 ring-white/10 shadow-2xl">
                 <Image
                   src="/images/profile.jpg"
                   alt="Anil Kumar – Senior MERN Stack Developer"
-                  width={224}
-                  height={224}
-                  className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700"
+                  width={208}
+                  height={208}
+                  className="object-cover w-full h-full"
                   priority
                 />
               </div>
-              {/* Available badge with brand colors */}
-              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-bg-card/90 backdrop-blur-md border border-accent-green/30 rounded-full px-4 py-1.5 shadow-lg whitespace-nowrap">
-                <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse shadow-[0_0_8px_#10D98A]" />
-                <span className="text-[10px] text-accent-green font-bold uppercase tracking-widest">
-                  Available for work
-                </span>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 availability-badge shadow-lg">
+                <span className="availability-dot" />
+                Available for work
               </div>
             </div>
           </motion.div>
 
-          {/* Text Content */}
-          <div className="flex-1 text-center md:text-left">
-            <motion.p variants={item} className="section-label mb-3">
+          <div className="flex-1 text-center lg:text-left max-w-2xl lg:max-w-none">
+            <motion.p variants={item} className="section-eyebrow mb-4 justify-center lg:justify-start">
               Senior MERN Stack Developer
             </motion.p>
 
             <motion.h1
               variants={item}
-              className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-6 tracking-tight text-white"
+              className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-5"
             >
               Anil{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
-                Kumar
-              </span>
+              <span className="text-gradient-accent">Kumar</span>
             </motion.h1>
 
             <motion.p
               variants={item}
-              className="text-text-secondary text-lg leading-relaxed max-w-xl mb-8 mx-auto md:mx-0"
+              className="text-text-secondary text-base md:text-lg leading-relaxed mb-8 mx-auto lg:mx-0"
             >
               {PERSONAL.tagline}
             </motion.p>
 
-            {/* Stats - Clean Row */}
             <motion.div
               variants={item}
-              className="flex gap-8 mb-10 justify-center md:justify-start"
+              className="grid grid-cols-3 gap-3 sm:gap-4 mb-8 max-w-md mx-auto lg:mx-0"
             >
               {[
-                { v: "4+", l: "Years Exp." },
+                { v: "4+", l: "Years" },
                 { v: "18+", l: "Projects" },
-                { v: "400+", l: "APIs Built" },
+                { v: "400+", l: "APIs" },
               ].map(({ v, l }) => (
-                <div key={l}>
-                  <p className="text-2xl font-black text-white">{v}</p>
-                  <p className="text-[10px] text-text-muted uppercase tracking-widest font-bold">
+                <div
+                  key={l}
+                  className="glass-card rounded-xl px-3 py-3 sm:px-4 sm:py-3.5 text-center hover:transform-none"
+                >
+                  <p className="font-display text-xl sm:text-2xl font-bold text-white">
+                    {v}
+                  </p>
+                  <p className="text-[10px] text-text-muted uppercase tracking-wider font-medium mt-0.5">
                     {l}
                   </p>
                 </div>
               ))}
             </motion.div>
 
-            {/* CTAs with premium styles */}
             <motion.div
               variants={item}
-              className="flex flex-wrap gap-3 justify-center md:justify-start"
+              className="flex flex-wrap gap-3 justify-center lg:justify-start"
             >
               <button
+                type="button"
                 onClick={handleScrollToContact}
                 className="btn-primary group"
               >
-                <span>Hire Me →</span>
+                <span>Hire me</span>
               </button>
-              <Link
-                href={PERSONAL.github}
-                target="_blank"
-                className="btn-ghost"
-              >
+              <Link href={PERSONAL.github} target="_blank" className="btn-ghost">
                 GitHub
               </Link>
               <Link
@@ -169,16 +134,6 @@ export default function Hero() {
               </Link>
             </motion.div>
           </div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-        >
-          <div className="w-px h-12 bg-gradient-to-b from-accent-cyan to-transparent animate-pulse" />
         </motion.div>
       </div>
     </section>

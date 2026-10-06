@@ -127,9 +127,41 @@ export const HEYWEEK_GALLERY_IMAGES = [
   "/project_imgs/heyweek_login.png",
 ] as const;
 
+export const FUTURE_FLOW_GALLERY_IMAGES = [
+  "/project_imgs/FF_home.png",
+  "/project_imgs/FF_map.png",
+  "/project_imgs/FF_allfleets.png",
+  "/project_imgs/FF_fleet_des.png",
+  "/project_imgs/FF_whatsapp.png",
+] as const;
+
+export const GOPAL_VASTRAM_GALLERY_IMAGES = [
+  "/project_imgs/gopal_home.png",
+  "/project_imgs/gopal_products.png",
+  "/project_imgs/gopal_checkout.png",
+  "/project_imgs/gopal_admin.png",
+] as const;
+
+export const REELSTORE_GALLERY_IMAGES = [
+  "/project_imgs/reelstore_home.png",
+  "/project_imgs/reelstore_product_review.png",
+  "/project_imgs/reelstore_reviews.png",
+  "/project_imgs/reelstore_admin.png",
+] as const;
+
 const PROJECT_LINK_DEFAULTS = {
   url: "https://danjoo.ai/",
   images: PROJECT_GALLERY_IMAGES,
+} as const;
+
+/** Placeholder copy until each project has its own URL, gallery, and copy. */
+const HEYWEEK_PLACEHOLDER_DETAILS = {
+  subtitle: "Chrome Extension",
+  description:
+    "Developed a time tracking browser extension with sync APIs, background service workers, and productivity analytics dashboard.",
+  tags: ["JavaScript", "Chrome APIs", "Node.js", "PostgreSQL"],
+  url: "https://heyweek.com/",
+  images: HEYWEEK_GALLERY_IMAGES,
 } as const;
 
 export const PROJECTS = [
@@ -153,13 +185,30 @@ export const PROJECTS = [
     images: UPCHAT_GALLERY_IMAGES,
   },
   {
-    ...PROJECT_LINK_DEFAULTS,
-    title: "Paragone Gents",
-    subtitle: "Booking System",
+    title: "HeyWeek",
+    subtitle: "Chrome Extension",
     description:
-      "Built user and admin panels complete with booking workflows, calendar management, and payment processing integrations.",
-    tags: ["Next.js", "Express", "PostgreSQL", "Stripe"],
+      "Developed a time tracking browser extension with sync APIs, background service workers, and productivity analytics dashboard.",
+    tags: ["JavaScript", "Chrome APIs", "Node.js", "PostgreSQL"],
     featured: true,
+    url: "https://heyweek.com/",
+    images: HEYWEEK_GALLERY_IMAGES,
+  },
+  {
+    title: "Future-Flow",
+    subtitle: "Courier & Logistics Platform",
+    description:
+      "End-to-end courier operations for FutureFlow Logistics — public marketing site, quote requests, fleet showcase, live shipment map views, and customer communication. Built for UK-wide same-day, next-day, and multi-drop delivery workflows with real-time visibility for dispatch and clients.",
+    tags: [
+      "Next.js",
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Maps & Tracking",
+    ],
+    featured: true,
+    url: "https://www.futureflowlogistics.co.uk/",
+    images: FUTURE_FLOW_GALLERY_IMAGES,
   },
   {
     title: "Skill Analyzer",
@@ -172,14 +221,54 @@ export const PROJECTS = [
     images: SKILL_ANALYSER_GALLERY_IMAGES,
   },
   {
-    title: "HeyWeek",
-    subtitle: "Chrome Extension",
-    description:
-      "Developed a time tracking browser extension with sync APIs, background service workers, and productivity analytics dashboard.",
-    tags: ["JavaScript", "Chrome APIs", "Node.js", "PostgreSQL"],
+    title: "Pet Rescue",
+    ...HEYWEEK_PLACEHOLDER_DETAILS,
     featured: false,
-    url: "https://heyweek.com/",
-    images: HEYWEEK_GALLERY_IMAGES,
+  },
+  {
+    title: "Fruit-Nut",
+    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    featured: false,
+  },
+  {
+    title: "Gopal-Vastarm",
+    subtitle: "Devotional E-Commerce (Balgopaal Vastram)",
+    description:
+      "Full-stack storefront for handcrafted Laddu Gopal devotional wear — vastra, mukut, and bansuri. Product catalog with variants and favorites, cart and checkout, customer-facing marketing pages, and an admin panel to manage inventory and orders for a Haryana-based brand.",
+    tags: ["Next.js", "React", "Node.js", "E-Commerce", "Admin Panel"],
+    featured: false,
+    url: "https://balgopaal-vastram-dg29.vercel.app/",
+    images: GOPAL_VASTRAM_GALLERY_IMAGES,
+  },
+  {
+    title: "Medical",
+    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    featured: false,
+  },
+  {
+    title: "Reel-Store",
+    subtitle: "Digital Reels Marketplace (ReelStore)",
+    description:
+      "Conversion-focused storefront for premium AI hybrid reel bundles — featured packs, product previews, social proof, and secure checkout with UPI and wallet payments. Instant post-purchase download, lifetime access, and admin tooling to manage bundles, buyers, and content delivery.",
+    tags: ["Next.js", "React", "Node.js", "Payments", "Digital Downloads"],
+    featured: false,
+    url: "https://www.digitlhub.online/",
+    images: REELSTORE_GALLERY_IMAGES,
+  },
+  {
+    title: "Snake-Ster",
+    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    featured: false,
+  },
+  {
+    title: "We-Online",
+    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    featured: false,
+  },
+  {
+    title: "Wedding-Invite",
+    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    featured: false,
   },
 ] as const;
 

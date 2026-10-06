@@ -20,6 +20,8 @@ export interface Project {
   description: string;
   tags: readonly string[];
   featured: boolean;
+  url: string;
+  images: readonly string[];
 }
 
 // ─── Navigation Types ─────────────────────────────────────────────────────────

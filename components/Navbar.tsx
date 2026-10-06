@@ -1,15 +1,44 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PERSONAL, NAV_LINKS } from "@/lib/constants";
+import SectionLink from "@/components/SectionLink";
+import { isSectionNavHref } from "@/lib/navigation";
+
+function NavItem({
+  href,
+  label,
+  className,
+  onNavigate,
+}: {
+  href: string;
+  label: string;
+  className: string;
+  onNavigate: () => void;
+}) {
+  if (isSectionNavHref(href)) {
+    return (
+      <SectionLink
+        sectionId={href}
+        onNavigate={onNavigate}
+        className={className}
+      >
+        {label}
+      </SectionLink>
+    );
+  }
+  return (
+    <Link href={href} onClick={onNavigate} className={className}>
+      {label}
+    </Link>
+  );
+}
 
 /** Matches `page-container` horizontal inset so the nav card aligns with page content. */
 const NAV_INSET = "px-5 sm:px-6 lg:px-8";
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -19,17 +48,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
-
-  const isHome = pathname === "/";
-
-  const handleNav = (ev: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    setMobileOpen(false);
-    if (!isHome) return;
-    const el = document.getElementById(href.replace("#", ""));
-    if (!el) return;
-    ev.preventDefault();
-    el.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <motion.header
@@ -70,13 +88,12 @@ export default function Navbar() {
           <ul className="hidden md:flex items-center gap-1" role="list">
             {NAV_LINKS.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={`/${item.href}`}
-                  onClick={(ev) => handleNav(ev, item.href)}
+                <NavItem
+                  href={item.href}
+                  label={item.label}
+                  onNavigate={() => setMobileOpen(false)}
                   className="px-3.5 py-2 rounded-lg text-xs font-medium text-text-secondary hover:text-white hover:bg-white/[0.05] transition-colors"
-                >
-                  {item.label}
-                </Link>
+                />
               </li>
             ))}
             <li className="ml-2">
@@ -123,13 +140,12 @@ export default function Navbar() {
             <ul className="px-4 py-5 flex flex-col gap-1" role="list">
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={`/${item.href}`}
-                    onClick={(ev) => handleNav(ev, item.href)}
+                  <NavItem
+                    href={item.href}
+                    label={item.label}
+                    onNavigate={() => setMobileOpen(false)}
                     className="block rounded-lg px-3 py-3 text-sm font-medium text-text-secondary hover:text-white hover:bg-white/[0.05] transition-colors"
-                  >
-                    {item.label}
-                  </Link>
+                  />
                 </li>
               ))}
               <li className="pt-3">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NAV_LINKS, PERSONAL } from "@/lib/constants";
+import { resolveNavHref } from "@/lib/navigation";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -40,7 +41,7 @@ export default function NotFound() {
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={`/${link.href}`}
+                  href={resolveNavHref(link.href)}
                   className="text-xs font-bold uppercase tracking-widest text-text-muted hover:text-accent-cyan transition-colors"
                 >
                   {link.label}

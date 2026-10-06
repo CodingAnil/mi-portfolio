@@ -96,8 +96,22 @@ export const EXPERIENCE = [
 ];
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
+/** Shared gallery until each project has its own screenshots. */
+export const PROJECT_GALLERY_IMAGES = [
+  "/project_imgs/danjoo_ai_home.png",
+  "/project_imgs/danjoo_ai_products.png",
+  "/project_imgs/danjoo_ai_admin_agents.png",
+  "/project_imgs/danjoo_ai_integrations.png",
+] as const;
+
+const PROJECT_LINK_DEFAULTS = {
+  url: "https://danjoo.ai/",
+  images: PROJECT_GALLERY_IMAGES,
+} as const;
+
 export const PROJECTS = [
   {
+    ...PROJECT_LINK_DEFAULTS,
     title: "Danjoo AI",
     subtitle: "AI Voice & Chat Agent SaaS",
     description:
@@ -106,6 +120,7 @@ export const PROJECTS = [
     featured: true,
   },
   {
+    ...PROJECT_LINK_DEFAULTS,
     title: "UpChat",
     subtitle: "AI Chatbot Platform",
     description:
@@ -114,6 +129,7 @@ export const PROJECTS = [
     featured: true,
   },
   {
+    ...PROJECT_LINK_DEFAULTS,
     title: "Paragone Gents",
     subtitle: "Booking System",
     description:
@@ -122,6 +138,7 @@ export const PROJECTS = [
     featured: true,
   },
   {
+    ...PROJECT_LINK_DEFAULTS,
     title: "Skill Analyzer",
     subtitle: "AI Skill Assessment",
     description:
@@ -130,6 +147,7 @@ export const PROJECTS = [
     featured: false,
   },
   {
+    ...PROJECT_LINK_DEFAULTS,
     title: "HeyWeek",
     subtitle: "Chrome Extension",
     description:
@@ -143,7 +161,7 @@ export const PROJECTS = [
 export const NAV_LINKS = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
+  { label: "Projects", href: "/projects" },
   { label: "Contact", href: "#contact" },
 ] as const;
 

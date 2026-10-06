@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import CursorGlow from "@/components/CursorGlow";
+import HashScrollHandler from "@/components/HashScrollHandler";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
         </a>
         <ParticleCanvas />
         <CursorGlow />
+        <HashScrollHandler />
         <Navbar />
         <main
           id="main"

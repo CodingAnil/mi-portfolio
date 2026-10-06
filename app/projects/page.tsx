@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PROJECTS } from "@/lib/constants";
 import ProjectCard from "@/components/ProjectCard";
+import SectionLink from "@/components/SectionLink";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -17,7 +18,7 @@ export default function ProjectsPage() {
   const others = PROJECTS.filter((project) => !project.featured);
 
   return (
-    <div className="pt-8 pb-24 bg-bg-primary">
+    <div className="pt-24 sm:pt-28 pb-24 bg-bg-primary">
       <div className="page-container">
         <header className="mb-16 text-center">
           <p className="section-eyebrow justify-center mb-4">Portfolio</p>
@@ -75,12 +76,12 @@ export default function ProjectsPage() {
             request.
           </p>
           <div className="flex flex-wrap gap-3 justify-center mt-8">
-            <Link href="/#projects" className="btn-ghost">
+            <SectionLink sectionId="" className="btn-ghost">
               ← Back to portfolio
-            </Link>
-            <Link href="/#contact" className="btn-primary">
+            </SectionLink>
+            <SectionLink sectionId="contact" className="btn-primary">
               <span>Discuss a project</span>
-            </Link>
+            </SectionLink>
           </div>
         </div>
       </div>

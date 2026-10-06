@@ -104,6 +104,29 @@ export const PROJECT_GALLERY_IMAGES = [
   "/project_imgs/danjoo_ai_integrations.png",
 ] as const;
 
+export const UPCHAT_GALLERY_IMAGES = [
+  "/project_imgs/upchat_home.png",
+  "/project_imgs/upchat_products.png",
+  "/project_imgs/upchat_bot_steps.png",
+  "/project_imgs/upchat_widget_bot.png",
+] as const;
+
+export const SKILL_ANALYSER_GALLERY_IMAGES = [
+  "/project_imgs/skillanalyser_home.png",
+  "/project_imgs/skillanalyser_measures.png",
+  "/project_imgs/skillanalyser_graph.png",
+  "/project_imgs/skillanalyser_enterprise.png",
+] as const;
+
+export const HEYWEEK_GALLERY_IMAGES = [
+  "/project_imgs/heyweek_home.png",
+  "/project_imgs/heyweek_web_home.png",
+  "/project_imgs/heyweek_start.png",
+  "/project_imgs/heyweek_web_tools.png",
+  "/project_imgs/heyweek_setting.png",
+  "/project_imgs/heyweek_login.png",
+] as const;
+
 const PROJECT_LINK_DEFAULTS = {
   url: "https://danjoo.ai/",
   images: PROJECT_GALLERY_IMAGES,
@@ -120,13 +143,14 @@ export const PROJECTS = [
     featured: true,
   },
   {
-    ...PROJECT_LINK_DEFAULTS,
     title: "UpChat",
     subtitle: "AI Chatbot Platform",
     description:
       "Developed admin and bot management panels with full bot training and chat handling APIs. Enabled multi-tenant chatbot deployment at scale.",
     tags: ["Node.js", "React", "MongoDB", "REST APIs"],
     featured: true,
+    url: "https://upchat.io/",
+    images: UPCHAT_GALLERY_IMAGES,
   },
   {
     ...PROJECT_LINK_DEFAULTS,
@@ -138,22 +162,24 @@ export const PROJECTS = [
     featured: true,
   },
   {
-    ...PROJECT_LINK_DEFAULTS,
     title: "Skill Analyzer",
     subtitle: "AI Skill Assessment",
     description:
       "Built skill testing and question management panels with AI-driven assessment logic for talent evaluation.",
     tags: ["React", "Node.js", "MongoDB", "AI"],
     featured: false,
+    url: "https://www.skillmotion.ai/",
+    images: SKILL_ANALYSER_GALLERY_IMAGES,
   },
   {
-    ...PROJECT_LINK_DEFAULTS,
     title: "HeyWeek",
     subtitle: "Chrome Extension",
     description:
       "Developed a time tracking browser extension with sync APIs, background service workers, and productivity analytics dashboard.",
     tags: ["JavaScript", "Chrome APIs", "Node.js", "PostgreSQL"],
     featured: false,
+    url: "https://heyweek.com/",
+    images: HEYWEEK_GALLERY_IMAGES,
   },
 ] as const;
 

@@ -149,6 +149,19 @@ export const REELSTORE_GALLERY_IMAGES = [
   "/project_imgs/reelstore_admin.png",
 ] as const;
 
+export const PET_RESCUE_GALLERY_IMAGES = [
+  "/project_imgs/dog_home.png",
+  "/project_imgs/dog_animals.png",
+  "/project_imgs/dog_treatment.png",
+  "/project_imgs/dog_donation.png",
+] as const;
+
+export const FRUIT_NUT_GALLERY_IMAGES = [
+  "/project_imgs/FN_home.png",
+  "/project_imgs/FN_plan.png",
+  "/project_imgs/FN_dait_details.png",
+] as const;
+
 const PROJECT_LINK_DEFAULTS = {
   url: "https://danjoo.ai/",
   images: PROJECT_GALLERY_IMAGES,
@@ -216,19 +229,29 @@ export const PROJECTS = [
     description:
       "Built skill testing and question management panels with AI-driven assessment logic for talent evaluation.",
     tags: ["React", "Node.js", "MongoDB", "AI"],
-    featured: false,
+    featured: true,
     url: "https://www.skillmotion.ai/",
     images: SKILL_ANALYSER_GALLERY_IMAGES,
   },
   {
     title: "Pet Rescue",
-    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    subtitle: "Animal Rescue NGO (Paw & Prints)",
+    description:
+      "Public website for a voiceless-animal rescue mission — impact stats, rescue-to-adoption journey, success stories, and how donations fund medical care, food, and shelter. Built to drive support, volunteer sign-ups, and transparent giving for stray and injured animals.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Donations", "Non-Profit"],
     featured: false,
+    url: "https://paw-prints-rescue-six.vercel.app/",
+    images: PET_RESCUE_GALLERY_IMAGES,
   },
   {
     title: "Fruit-Nut",
-    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    subtitle: "Fresh Fruit Store (FrutNut)",
+    description:
+      "Brand site for a Chandigarh & Mohali fresh-fruit business — hero and menu positioning, combo offerings, subscription plans, and contact-first ordering with free local delivery messaging. Customization and diet-detail pages for health-focused customers.",
+    tags: ["Next.js", "React", "Tailwind CSS", "E-Commerce", "Subscriptions"],
     featured: false,
+    url: "https://frutnut.vercel.app/",
+    images: FRUIT_NUT_GALLERY_IMAGES,
   },
   {
     title: "Gopal-Vastarm",
@@ -236,14 +259,9 @@ export const PROJECTS = [
     description:
       "Full-stack storefront for handcrafted Laddu Gopal devotional wear — vastra, mukut, and bansuri. Product catalog with variants and favorites, cart and checkout, customer-facing marketing pages, and an admin panel to manage inventory and orders for a Haryana-based brand.",
     tags: ["Next.js", "React", "Node.js", "E-Commerce", "Admin Panel"],
-    featured: false,
+    featured: true,
     url: "https://balgopaal-vastram-dg29.vercel.app/",
     images: GOPAL_VASTRAM_GALLERY_IMAGES,
-  },
-  {
-    title: "Medical",
-    ...HEYWEEK_PLACEHOLDER_DETAILS,
-    featured: false,
   },
   {
     title: "Reel-Store",

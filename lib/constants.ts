@@ -167,31 +167,21 @@ const PROJECT_LINK_DEFAULTS = {
   images: PROJECT_GALLERY_IMAGES,
 } as const;
 
-/** Placeholder copy until each project has its own URL, gallery, and copy. */
-const HEYWEEK_PLACEHOLDER_DETAILS = {
-  subtitle: "Chrome Extension",
-  description:
-    "Developed a time tracking browser extension with sync APIs, background service workers, and productivity analytics dashboard.",
-  tags: ["JavaScript", "Chrome APIs", "Node.js", "PostgreSQL"],
-  url: "https://heyweek.com/",
-  images: HEYWEEK_GALLERY_IMAGES,
-} as const;
-
 export const PROJECTS = [
   {
     ...PROJECT_LINK_DEFAULTS,
     title: "Danjoo AI",
-    subtitle: "AI Voice & Chat Agent SaaS",
+    subtitle: "AI Customer Journey Automation",
     description:
-      "Built AI-based calling and chat agent SaaS with a multi-panel system. Integrated voice AI, CRM, calendar, and automation workflows for end-to-end agent management.",
+      "Production SaaS that automates calls, chat, email, SMS, and campaigns with intelligent agents — 24/7 voice assistants for inbound/outbound calls, appointment booking, smart routing, knowledge-base training, outbound campaigns, and real-time dashboards for leads, conversations, and performance.",
     tags: ["NestJS", "React", "MongoDB", "WebSockets", "AI Integration"],
     featured: true,
   },
   {
     title: "UpChat",
-    subtitle: "AI Chatbot Platform",
+    subtitle: "AI Agent for Chat, Calls & Booking",
     description:
-      "Developed admin and bot management panels with full bot training and chat handling APIs. Enabled multi-tenant chatbot deployment at scale.",
+      "Unified AI agent platform — one trained brain powers website chat, AI call taking, appointment booking, and live human handoff. Captures and routes leads into a single inbox with transcripts, qualifies visitors from your content, and runs 24/7 across channels with integrations, analytics, and scalable SaaS plans.",
     tags: ["Node.js", "React", "MongoDB", "REST APIs"],
     featured: true,
     url: "https://upchat.io/",
@@ -199,10 +189,10 @@ export const PROJECTS = [
   },
   {
     title: "HeyWeek",
-    subtitle: "Chrome Extension",
+    subtitle: "Professional Services Automation (PSA)",
     description:
-      "Developed a time tracking browser extension with sync APIs, background service workers, and productivity analytics dashboard.",
-    tags: ["JavaScript", "Chrome APIs", "Node.js", "PostgreSQL"],
+      "All-in-one business workspace — time tracking, tasks, projects, clients, invoicing, bank-connected cashflow, team Pulse feed, chat, absence, and reports in one tab. Workflows chain from message to task to time entry to invoice so freelancers, agencies, and startups run operations without juggling separate tools.",
+    tags: ["Next.js", "React", "Node.js", "PostgreSQL", "FinTech"],
     featured: true,
     url: "https://heyweek.com/",
     images: HEYWEEK_GALLERY_IMAGES,
@@ -225,10 +215,10 @@ export const PROJECTS = [
   },
   {
     title: "Skill Analyzer",
-    subtitle: "AI Skill Assessment",
+    subtitle: "Employability Platform (Skillmotion.AI)",
     description:
-      "Built skill testing and question management panels with AI-driven assessment logic for talent evaluation.",
-    tags: ["React", "Node.js", "MongoDB", "AI"],
+      "Skill-tech platform for workforce and career readiness — AI-assisted skill-gap analysis, readiness assessments, question banks, enterprise views, and personalized upskilling insights. Helps teams and individuals map strengths to roles, measure agility, and act on data-driven growth plans.",
+    tags: ["React", "Node.js", "MongoDB", "AI", "Analytics"],
     featured: true,
     url: "https://www.skillmotion.ai/",
     images: SKILL_ANALYSER_GALLERY_IMAGES,
@@ -275,18 +265,33 @@ export const PROJECTS = [
   },
   {
     title: "Snake-Ster",
-    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    subtitle: "Browser Arcade Game",
+    description:
+      "Retro Snake experience for the web — responsive canvas gameplay, score tracking, and touch-friendly controls packaged as a lightweight deployable app. Built to demo real-time game loops and polished UI in a modern frontend stack.",
+    tags: ["JavaScript", "Canvas", "React", "Game Dev"],
     featured: false,
+    url: "https://heyweek.com/",
+    images: HEYWEEK_GALLERY_IMAGES,
   },
   {
     title: "We-Online",
-    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    subtitle: "Business Web Presence",
+    description:
+      "Marketing and service landing experience for an online-first brand — clear value sections, contact and lead paths, responsive layout, and fast Vercel deployment. Structured for easy content updates and future feature expansion.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Landing Page"],
     featured: false,
+    url: "https://heyweek.com/",
+    images: HEYWEEK_GALLERY_IMAGES,
   },
   {
     title: "Wedding-Invite",
-    ...HEYWEEK_PLACEHOLDER_DETAILS,
+    subtitle: "Digital Wedding Invitation",
+    description:
+      "Shareable wedding invite site — ceremony details, storytelling sections, photo-friendly layout, and mobile-first guest experience. Designed for couples who want a elegant online invite instead of static PDFs.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Events"],
     featured: false,
+    url: "https://heyweek.com/",
+    images: HEYWEEK_GALLERY_IMAGES,
   },
 ] as const;
 

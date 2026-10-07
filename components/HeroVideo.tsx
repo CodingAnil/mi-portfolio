@@ -2,15 +2,16 @@
 
 import { useEffect, useRef } from "react";
 
+type Props = {
+  variant?: "desktop" | "mobile-backdrop";
+};
+
 /**
- * Ambient background clip for the hero.
- *
- * The source has no alpha channel, so it is composited with `screen` blending:
- * its near-black background contributes nothing over the page background,
- * leaving only the bright hologram visible.
+ * Ambient background clip for the hero (screen blend — dark source stays invisible).
  */
-export default function HeroVideo() {
+export default function HeroVideo({ variant = "desktop" }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isDesktop = variant === "desktop";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -20,19 +21,15 @@ export default function HeroVideo() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    // Never play for visitors who asked for reduced motion.
     if (reduceMotion) {
       video.pause();
       return;
     }
 
     const play = () => {
-      video.play().catch(() => {
-        /* autoplay can still be blocked; the first frame remains */
-      });
+      video.play().catch(() => {});
     };
 
-    // Only download and play while the clip is actually on screen.
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !document.hidden) play();
@@ -53,11 +50,6 @@ export default function HeroVideo() {
 
   return (
     <>
-      {/*
-        Height-locked so it always spans the hero, and offset from the left so
-        the subject — centred in the source frame — lands on the right-hand
-        side, clear of the headline.
-      */}
       <video
         ref={videoRef}
         src="/file/ai_gif.webm"
@@ -67,14 +59,15 @@ export default function HeroVideo() {
         preload="none"
         aria-hidden="true"
         tabIndex={-1}
-        className="absolute top-0 right-[-31rem] h-full w-auto max-w-none select-none pointer-events-none"
+        className={
+          isDesktop
+            ? "absolute top-[9vh] lg:top-[10vh] right-[-2rem] md:right-[-4rem] xl:right-[-8rem] 2xl:right-[-11rem] h-[min(82vh,680px)] w-auto max-w-none select-none pointer-events-none"
+            : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[min(55vh,420px)] w-auto max-w-none select-none pointer-events-none opacity-70"
+        }
         style={{
-          // Declared up front: with preload="none" the element would otherwise
-          // lay out at the default 300x150 and the right-anchored offset would
-          // push it off-screen, so it would never come into view to load.
           aspectRatio: "898 / 506",
           mixBlendMode: "screen",
-          opacity: 0.9,
+          opacity: isDesktop ? 0.9 : 0.65,
           maskImage:
             "linear-gradient(to bottom, transparent 0%, #000 14%, #000 80%, transparent 100%)",
           WebkitMaskImage:
@@ -82,22 +75,23 @@ export default function HeroVideo() {
         }}
       />
 
-      {/* Scrim: keeps the headline and copy fully legible over the clip */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 30%, rgba(10,15,30,0.92) 44%, rgba(10,15,30,0.6) 60%, rgba(10,15,30,0.18) 74%, transparent 86%)",
-        }}
-      />
-
-      {/* Fade into the section below */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
-        style={{
-          background: "linear-gradient(to top, var(--bg-primary), transparent)",
-        }}
-      />
+      {isDesktop && (
+        <>
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 30%, rgba(10,15,30,0.92) 44%, rgba(10,15,30,0.6) 60%, rgba(10,15,30,0.18) 74%, transparent 86%)",
+            }}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
+            style={{
+              background: "linear-gradient(to top, var(--bg-primary), transparent)",
+            }}
+          />
+        </>
+      )}
     </>
   );
 }

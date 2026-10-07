@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import CursorGlow from "@/components/CursorGlow";
 import HashScrollHandler from "@/components/HashScrollHandler";
+import OpenToWorkBadge from "@/components/OpenToWorkBadge";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <OpenToWorkBadge />
       </body>
     </html>
   );

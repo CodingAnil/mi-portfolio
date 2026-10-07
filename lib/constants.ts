@@ -142,6 +142,12 @@ export const GOPAL_VASTRAM_GALLERY_IMAGES = [
   "/project_imgs/gopal_admin.png",
 ] as const;
 
+export const SNAKESTER_GALLERY_IMAGES = [
+  "/project_imgs/SS_home.png",
+  "/project_imgs/SS_menu.png",
+  "/project_imgs/SS_reviews.png",
+] as const;
+
 export const REELSTORE_GALLERY_IMAGES = [
   "/project_imgs/reelstore_home.png",
   "/project_imgs/reelstore_product_review.png",
@@ -265,13 +271,13 @@ export const PROJECTS = [
   },
   {
     title: "Snake-Ster",
-    subtitle: "Browser Arcade Game",
+    subtitle: "Late-Night Snacks Delivery (SnackSter)",
     description:
-      "Retro Snake experience for the web — responsive canvas gameplay, score tracking, and touch-friendly controls packaged as a lightweight deployable app. Built to demo real-time game loops and polished UI in a modern frontend stack.",
-    tags: ["JavaScript", "Canvas", "React", "Game Dev"],
+      "Mohali-focused delivery brand site for chakna, soda, and ice — hero offers, combo packs (Party, Premium, Quick Bite), snacks and liquor menus, WhatsApp-first ordering, and trust stats for 30-minute delivery, free delivery above ₹199, and late-night service.",
+    tags: ["Next.js", "React", "Tailwind CSS", "WhatsApp", "Local Delivery"],
     featured: false,
-    url: "https://heyweek.com/",
-    images: HEYWEEK_GALLERY_IMAGES,
+    url: "https://snakester-livid.vercel.app/",
+    images: SNAKESTER_GALLERY_IMAGES,
   },
   {
     title: "We-Online",
@@ -279,16 +285,6 @@ export const PROJECTS = [
     description:
       "Marketing and service landing experience for an online-first brand — clear value sections, contact and lead paths, responsive layout, and fast Vercel deployment. Structured for easy content updates and future feature expansion.",
     tags: ["Next.js", "React", "Tailwind CSS", "Landing Page"],
-    featured: false,
-    url: "https://heyweek.com/",
-    images: HEYWEEK_GALLERY_IMAGES,
-  },
-  {
-    title: "Wedding-Invite",
-    subtitle: "Digital Wedding Invitation",
-    description:
-      "Shareable wedding invite site — ceremony details, storytelling sections, photo-friendly layout, and mobile-first guest experience. Designed for couples who want a elegant online invite instead of static PDFs.",
-    tags: ["Next.js", "React", "Tailwind CSS", "Events"],
     featured: false,
     url: "https://heyweek.com/",
     images: HEYWEEK_GALLERY_IMAGES,

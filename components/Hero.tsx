@@ -34,18 +34,18 @@ export default function Hero() {
       <div className="absolute inset-0 grid-overlay opacity-80" aria-hidden="true" />
 
       <div
-        className="absolute inset-0 z-0 hidden lg:block overflow-hidden"
+        className="hero-ambient-video absolute inset-0 z-0 hidden lg:block overflow-hidden"
         aria-hidden="true"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-primary via-bg-primary/88 to-bg-primary/15 z-[1]" />
+        <div className="hero-video-wash absolute inset-0 bg-gradient-to-r from-bg-primary via-bg-primary/88 to-bg-primary/15 z-[1]" />
         <HeroVideo variant="desktop" />
       </div>
 
       <div
-        className="absolute inset-0 z-0 overflow-hidden lg:hidden pointer-events-none"
+        className="hero-ambient-video absolute inset-0 z-0 overflow-hidden lg:hidden pointer-events-none"
         aria-hidden
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/75 via-bg-primary/88 to-bg-primary z-[1]" />
+        <div className="hero-video-wash absolute inset-0 bg-gradient-to-b from-bg-primary/75 via-bg-primary/88 to-bg-primary z-[1]" />
         <HeroVideo variant="mobile-backdrop" />
       </div>
 
@@ -60,7 +60,7 @@ export default function Hero() {
             variants={item}
             className="section-eyebrow mb-4 justify-center lg:justify-start"
           >
-            Senior MERN Stack Developer
+            MERN Stack Developer
           </motion.p>
 
           <motion.h1

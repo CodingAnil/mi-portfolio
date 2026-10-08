@@ -12,14 +12,13 @@ const baseUrl = SITE_URL;
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Anil Kumar – Senior MERN Stack Developer",
+    default: "Anil Kumar – MERN Stack Developer",
     template: "%s | Anil Kumar",
   },
   description:
-    "Senior MERN Stack Developer with 4+ years of experience building scalable SaaS platforms, AI-powered systems, and high-performance web applications. Delivered 18+ production projects and 400+ APIs.",
+    "MERN Stack Developer with 4+ years of experience building scalable SaaS platforms, AI-powered systems, and high-performance web applications. Delivered 18+ production projects and 400+ APIs.",
   keywords: [
     "MERN Stack Developer",
-    "Senior Developer",
     "Node.js",
     "NestJS",
     "React",
@@ -44,23 +43,23 @@ export const defaultMetadata: Metadata = {
     locale: "en_US",
     url: baseUrl,
     siteName: "Anil Kumar – Portfolio",
-    title: "Anil Kumar – Senior MERN Stack Developer",
+    title: "Anil Kumar – MERN Stack Developer",
     description:
-      "Senior MERN Stack Developer with 4+ years experience in SaaS, AI, and multi-tenant platforms. Delivered 18+ production systems and 400+ APIs.",
+      "MERN Stack Developer with 4+ years experience in SaaS, AI, and multi-tenant platforms. Delivered 18+ production systems and 400+ APIs.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Anil Kumar – Senior MERN Stack Developer",
+        alt: "Anil Kumar – MERN Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anil Kumar – Senior MERN Stack Developer",
+    title: "Anil Kumar – MERN Stack Developer",
     description:
-      "Senior MERN Stack Developer with 4+ years experience in SaaS, AI, and multi-tenant platforms.",
+      "MERN Stack Developer with 4+ years experience in SaaS, AI, and multi-tenant platforms.",
     images: ["/og-image.png"],
   },
   robots: {

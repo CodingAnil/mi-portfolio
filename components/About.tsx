@@ -35,7 +35,7 @@ export default function About() {
                   <div className="relative w-full h-[320px] sm:h-[360px] md:h-[400px] lg:h-[min(520px,72vh)] xl:h-[540px]">
                     <Image
                       src="/images/profile.jpg"
-                      alt="Anil Kumar – Senior MERN Stack Developer"
+                      alt="Anil Kumar – MERN Stack Developer"
                       fill
                       sizes="(max-width: 1024px) 420px, 460px"
                       className="object-cover object-[center_22%]"
@@ -65,11 +65,11 @@ export default function About() {
                   systems
                 </>
               }
-              description="Senior MERN developer focused on SaaS, AI platforms, and production-grade APIs — with an emphasis on clarity, security, and long-term maintainability."
+              description="MERN developer focused on SaaS, AI platforms, and production-grade APIs — with an emphasis on clarity, security, and long-term maintainability."
             />
             <div className="space-y-4 text-text-secondary text-base leading-relaxed -mt-6">
               <p>
-                Senior MERN Stack Developer with 4+ years of experience in SaaS,
+                MERN Stack Developer with 4+ years of experience in SaaS,
                 AI, chatbot, and multi-tenant platforms. I specialize in
                 building high-performance web applications that solve real-world
                 problems.

@@ -58,6 +58,7 @@ export default function ProjectImageLightbox({
 
   return createPortal(
     <div
+      data-on-media
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-8"
       role="dialog"
       aria-modal="true"

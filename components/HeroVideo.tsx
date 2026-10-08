@@ -61,8 +61,8 @@ export default function HeroVideo({ variant = "desktop" }: Props) {
         tabIndex={-1}
         className={
           isDesktop
-            ? "absolute top-[9vh] lg:top-[10vh] right-[-2rem] md:right-[-4rem] xl:right-[-8rem] 2xl:right-[-11rem] h-[min(82vh,680px)] w-auto max-w-none select-none pointer-events-none"
-            : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[min(55vh,420px)] w-auto max-w-none select-none pointer-events-none opacity-70"
+            ? "hero-video-el absolute top-[9vh] lg:top-[10vh] right-[-2rem] md:right-[-4rem] xl:right-[-8rem] 2xl:right-[-11rem] h-[min(82vh,680px)] w-auto max-w-none select-none pointer-events-none"
+            : "hero-video-el absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[min(55vh,420px)] w-auto max-w-none select-none pointer-events-none opacity-70"
         }
         style={{
           aspectRatio: "898 / 506",
@@ -78,7 +78,7 @@ export default function HeroVideo({ variant = "desktop" }: Props) {
       {isDesktop && (
         <>
           <div
-            className="absolute inset-0 pointer-events-none"
+            className="hero-video-scrim absolute inset-0 pointer-events-none"
             style={{
               background:
                 "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 30%, rgba(10,15,30,0.92) 44%, rgba(10,15,30,0.6) 60%, rgba(10,15,30,0.18) 74%, transparent 86%)",

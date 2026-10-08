@@ -3,7 +3,7 @@ import type { EducationItem, LanguageItem } from "@/types";
 // ─── Personal Information ────────────────────────────────────────────────────
 export const PERSONAL = {
   name: "Anil Kumar",
-  title: "Senior MERN Stack Developer",
+  title: "MERN Stack Developer",
   tagline:
     "Building scalable SaaS platforms, AI-powered systems, and high-performance web applications.",
   email: "programmeranil36@gmail.com",
@@ -70,10 +70,10 @@ export const EXPERIENCE = [
   {
     company: "Eminence Technology",
     location: "Mohali, Punjab",
-    role: "Senior MERN Stack Developer",
+    role: "MERN Stack Developer",
     period: "Jun 2022 – Present",
     highlights: [
-      "Promoted from Frontend Developer to Sr. MERN Stack Developer",
+      "Promoted from Frontend Developer to MERN Stack Developer",
       "Delivered 18+ production projects across diverse domains",
       "Built 400+ secure REST APIs with authentication & authorization",
       "Designed backend architecture for 15+ production systems",
@@ -307,7 +307,7 @@ export const NAV_LINKS = [
 
 // ─── Profile Summary ──────────────────────────────────────────────────────────
 export const PROFILE_SUMMARY =
-  "Senior MERN Stack Developer with 4+ years of experience in SaaS, AI, chatbot, and multi-tenant platforms. Delivered 18+ production systems, built 400+ APIs, and designed 15+ backend architectures. Strong in Node.js, NestJS, Next.js, microservices, and real-time applications.";
+  "MERN Stack Developer with 4+ years of experience in SaaS, AI, chatbot, and multi-tenant platforms. Delivered 18+ production systems, built 400+ APIs, and designed 15+ backend architectures. Strong in Node.js, NestJS, Next.js, microservices, and real-time applications.";
 
 // ─── Education ────────────────────────────────────────────────────────────────
 export const EDUCATION: EducationItem[] = [

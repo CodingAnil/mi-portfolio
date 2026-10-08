@@ -4,21 +4,52 @@
 
 @layer base {
   :root {
-    --bg-primary: #05060a;
-    --bg-secondary: #0a0c12;
-    --bg-surface: #0f1219;
-    --bg-card: #0c0f16;
+    --c-bg-primary: 10 15 30;
+    --c-bg-secondary: 15 22 41;
+    --c-bg-surface: 19 28 53;
+    --c-bg-card: 13 21 38;
+    --c-accent-cyan: 0 212 255;
+    --c-accent-purple: 124 58 237;
+    --c-accent-blue: 59 130 246;
+    --c-accent-green: 16 217 138;
+    --c-text-primary: 226 232 240;
+    --c-text-secondary: 148 163 184;
+    --c-text-muted: 100 116 139;
+    --bg-primary: rgb(var(--c-bg-primary));
+    --bg-secondary: rgb(var(--c-bg-secondary));
+    --bg-surface: rgb(var(--c-bg-surface));
+    --bg-card: rgb(var(--c-bg-card));
     --bg-elevated: #12161f;
-    --accent-cyan: #38bdf8;
-    --accent-purple: #818cf8;
-    --accent-blue: #3b82f6;
-    --accent-green: #34d399;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --accent-cyan: rgb(var(--c-accent-cyan));
+    --accent-purple: rgb(var(--c-accent-purple));
+    --accent-blue: rgb(var(--c-accent-blue));
+    --accent-green: rgb(var(--c-accent-green));
+    --text-primary: rgb(var(--c-text-primary));
+    --text-secondary: rgb(var(--c-text-secondary));
+    --text-muted: rgb(var(--c-text-muted));
     --border-subtle: rgba(255, 255, 255, 0.07);
     --border-strong: rgba(255, 255, 255, 0.12);
     --glow-accent: rgba(56, 189, 248, 0.15);
+    color-scheme: dark;
+  }
+
+  html.light {
+    --c-bg-primary: 247 248 252;
+    --c-bg-secondary: 255 255 255;
+    --c-bg-surface: 255 255 255;
+    --c-bg-card: 255 255 255;
+    --c-accent-cyan: 124 58 237;
+    --c-accent-purple: 109 40 217;
+    --c-accent-blue: 99 102 241;
+    --c-accent-green: 5 150 105;
+    --c-text-primary: 17 24 39;
+    --c-text-secondary: 71 85 105;
+    --c-text-muted: 100 116 139;
+    --bg-elevated: #ffffff;
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-strong: rgba(15, 23, 42, 0.14);
+    --glow-accent: rgba(124, 58, 237, 0.18);
+    color-scheme: light;
   }
 
   html {
@@ -323,6 +354,176 @@
 
   .contact-form-captcha .h-captcha iframe {
     max-width: 100%;
+  }
+}
+
+/* ── Light mode (WeOnline-style: white surfaces, dark type, purple accent) ── */
+html.light body {
+  background-color: rgb(var(--c-bg-primary));
+  color: rgb(var(--c-text-primary));
+}
+
+html.light ::selection {
+  background: rgba(124, 58, 237, 0.22);
+  color: #111827;
+}
+
+html.light .text-white {
+  color: #111827;
+}
+
+html.light .hover\:text-white:hover {
+  color: #111827;
+}
+
+html.light .section-title {
+  color: #111827;
+}
+
+html.light .text-gradient-accent {
+  background-image: linear-gradient(90deg, #7c3aed, #8b5cf6 45%, #6366f1);
+}
+
+html.light [class*="bg-white/"] {
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+html.light [class*="border-white"] {
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+html.light [data-on-media] .text-white,
+html.light [data-on-media].text-white,
+html.light [data-on-media] [class*="text-white"] {
+  color: #fff;
+}
+
+html.light [data-on-media] [class*="bg-white"] {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+html.light [data-on-media] [class*="border-white"] {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+html.light .glass-card {
+  background: #ffffff;
+  border: 1px solid #e7e9f0;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html.light .glass-card:hover {
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 14px 36px rgba(124, 58, 237, 0.1);
+}
+
+html.light .btn-primary {
+  background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);
+  color: #ffffff;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 8px 20px rgba(124, 58, 237, 0.28);
+}
+
+html.light .btn-ghost {
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+html.light .btn-ghost:hover {
+  background: #f5f3ff;
+  border-color: rgba(124, 58, 237, 0.4);
+  color: #6d28d9;
+}
+
+html.light .input-field {
+  background: #ffffff;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+
+html.light .input-field:focus {
+  background: #ffffff;
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+html.light .skill-badge {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #374151;
+}
+
+html.light .grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+}
+
+html.light .ai-ambient {
+  background:
+    radial-gradient(ellipse 50% 40% at 85% 15%, rgba(124, 58, 237, 0.08), transparent 55%),
+    radial-gradient(ellipse 40% 35% at 10% 80%, rgba(99, 102, 241, 0.06), transparent 50%);
+}
+
+html.light .hero-video-el {
+  mix-blend-mode: multiply !important;
+  filter: invert(1) hue-rotate(180deg);
+  opacity: 0.95 !important;
+}
+
+html.light .hero-video-wash {
+  background-image: linear-gradient(
+    to right,
+    rgb(var(--c-bg-primary)) 0%,
+    rgba(247, 248, 252, 0.92) 34%,
+    rgba(247, 248, 252, 0.45) 58%,
+    transparent 78%
+  ) !important;
+}
+
+html.light .hero-video-scrim {
+  background: linear-gradient(
+    to right,
+    rgb(var(--c-bg-primary)) 0%,
+    rgba(247, 248, 252, 0.88) 36%,
+    rgba(247, 248, 252, 0.35) 58%,
+    transparent 76%
+  ) !important;
+}
+
+html.light #particle-canvas {
+  opacity: 0.18;
+}
+
+@keyframes theme-icon-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+}
+
+.theme-icon-glow {
+  animation: theme-icon-glow 2.4s ease-in-out infinite;
+}
+
+.theme-toggle {
+  height: 2.25rem;
+  width: 2.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-icon-glow {
+    animation: none;
+    opacity: 1;
   }
 }
 

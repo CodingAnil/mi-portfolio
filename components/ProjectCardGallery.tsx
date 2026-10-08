@@ -36,6 +36,7 @@ export default function ProjectCardGallery({ images, title }: Props) {
   return (
     <>
       <div
+        data-on-media
         className="relative mb-5 -mx-6 -mt-6 md:-mx-7 md:-mt-7 rounded-t-2xl overflow-hidden border-b border-white/[0.06] bg-bg-secondary/50 aspect-[16/10] group/gallery"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}

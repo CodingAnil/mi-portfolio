@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PERSONAL, NAV_LINKS } from "@/lib/constants";
 import SectionLink from "@/components/SectionLink";
 import { isSectionNavHref } from "@/lib/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
+import { togglePortfolioTheme } from "@/lib/theme";
 
 function NavItem({
   href,
@@ -65,34 +67,39 @@ export default function Navbar() {
           className="flex items-center justify-between gap-4"
           aria-label="Main"
         >
-          <Link
-            href="/"
-            className="flex items-center gap-3 group min-w-0"
-            aria-label="Home"
-          >
-            <div className="w-9 h-9 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center transition-colors group-hover:border-accent-cyan/40">
+          <div className="flex items-center gap-3 min-w-0">
+            <button
+              type="button"
+              onClick={() => togglePortfolioTheme()}
+              className="w-9 h-9 shrink-0 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center transition-colors hover:border-accent-cyan/40"
+              aria-label="Toggle light and dark mode"
+              title="Toggle theme"
+            >
               <span className="font-display font-bold text-accent-cyan text-sm">
                 A
               </span>
-            </div>
-            <div className="flex flex-col min-w-0">
+            </button>
+            <Link href="/" className="flex flex-col min-w-0 group" aria-label="Home">
               <span className="font-display font-semibold text-white text-sm tracking-tight truncate">
                 {PERSONAL.name}
               </span>
               <span className="text-[10px] text-text-muted font-medium truncate hidden sm:block">
                 {PERSONAL.title}
               </span>
-            </div>
-          </Link>
+            </Link>
+          </div>
 
           <ul className="hidden md:flex items-center gap-1" role="list">
+            <li className="mr-1">
+              <ThemeToggle />
+            </li>
             {NAV_LINKS.map((item) => (
               <li key={item.href}>
                 <NavItem
                   href={item.href}
                   label={item.label}
                   onNavigate={() => setMobileOpen(false)}
-                  className="px-3.5 py-2 rounded-lg text-xs font-medium text-text-secondary hover:text-white hover:bg-white/[0.05] transition-colors"
+                  className="inline-flex h-9 items-center justify-center px-3.5 rounded-lg text-xs font-medium text-text-secondary hover:text-white hover:bg-white/[0.05] transition-colors"
                 />
               </li>
             ))}
@@ -103,6 +110,9 @@ export default function Navbar() {
             </li>
           </ul>
 
+          <div className="md:hidden">
+            <ThemeToggle />
+          </div>
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -138,6 +148,9 @@ export default function Navbar() {
             className="md:hidden mt-2 mx-auto w-full max-w-6xl rounded-2xl border border-white/10 bg-bg-card/95 backdrop-blur-xl overflow-hidden"
           >
             <ul className="px-4 py-5 flex flex-col gap-1" role="list">
+              <li className="mb-2">
+                <ThemeToggle />
+              </li>
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
                   <NavItem

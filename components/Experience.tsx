@@ -21,7 +21,7 @@ export default function Experience() {
 
         <div className="relative space-y-6 md:space-y-8">
           <div
-            className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-accent-cyan/40 via-white/10 to-transparent"
+            className="experience-line absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-accent-cyan/40 via-white/10 to-transparent"
             aria-hidden
           />
           {EXPERIENCE.map((job, idx) => (

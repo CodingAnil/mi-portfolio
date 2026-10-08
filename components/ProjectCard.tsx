@@ -28,18 +28,17 @@ export default function ProjectCard({ project, index }: Props) {
           className="flex flex-col flex-1 min-h-0 -mx-1 px-1 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan/40"
           aria-label={`${project.title} — open live project in new tab`}
         >
-          {project.featured && (
-            <div className="flex justify-end mb-4">
-              <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20">
-                Featured
-              </span>
-            </div>
-          )}
-
           <div className="space-y-2 mb-3">
-            <h4 className="font-display text-lg font-semibold text-white group-hover:text-accent-cyan transition-colors">
-              {project.title}
-            </h4>
+            <div className="flex items-start justify-between gap-3">
+              <h4 className="font-display text-lg font-semibold text-white group-hover:text-accent-cyan transition-colors">
+                {project.title}
+              </h4>
+              {project.featured && (
+                <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20">
+                  Featured
+                </span>
+              )}
+            </div>
             <p className="text-[11px] font-medium uppercase tracking-wider text-text-muted">
               {project.subtitle}
             </p>

@@ -57,9 +57,9 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 ${NAV_INSET}`}
     >
       <div
-        className={`mx-auto w-full max-w-6xl rounded-2xl border transition-all duration-300 ${
+        className={`site-nav mx-auto w-full max-w-6xl rounded-2xl border transition-all duration-300 ${
           scrolled
-            ? "border-white/10 bg-bg-card/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)] px-4 sm:px-5 py-2.5"
+            ? "is-scrolled border-white/10 bg-bg-card/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)] px-4 sm:px-5 py-2.5"
             : "border-transparent bg-transparent px-3 sm:px-4 py-2"
         }`}
       >

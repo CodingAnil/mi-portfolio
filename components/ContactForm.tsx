@@ -6,6 +6,7 @@ import type { ContactFormData, ContactFormState } from "@/types";
 import { PERSONAL } from "@/lib/constants";
 import SectionHeader from "@/components/SectionHeader";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { THEME_EVENT, isLightTheme } from "@/lib/theme";
 
 /** Web3Forms-provided site key; free plan — see https://docs.web3forms.com/getting-started/customizations/spam-protection/hcaptcha */
 const WEB3FORMS_HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
@@ -32,6 +33,14 @@ export default function ContactForm() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState(false);
   const [captchaMountKey, setCaptchaMountKey] = useState(0);
+  const [lightTheme, setLightTheme] = useState(true);
+
+  useEffect(() => {
+    const sync = () => setLightTheme(isLightTheme());
+    sync();
+    window.addEventListener(THEME_EVENT, sync);
+    return () => window.removeEventListener(THEME_EVENT, sync);
+  }, []);
 
   const validate = (): boolean => {
     const e: Partial<ContactFormData> = {};
@@ -340,20 +349,30 @@ export default function ContactForm() {
                 >
                   <div className="contact-form-captcha w-full">
                     <HCaptchaWidget
-                      key={captchaMountKey}
+                      key={`${captchaMountKey}-${lightTheme ? "light" : "dark"}`}
                       sitekey={WEB3FORMS_HCAPTCHA_SITEKEY}
                       reCaptchaCompat={false}
                       size="compact"
                       theme={{
-                        palette: {
-                          mode: "dark",
-                          primary: "#38bdf8",
-                          canvas: "#0c0f16",
-                          text: "#f1f5f9",
-                          secondary: "#64748b",
-                          inputBorder: "rgba(255, 255, 255, 0.12)",
-                          inputFill: "rgba(255, 255, 255, 0.04)",
-                        },
+                        palette: lightTheme
+                          ? {
+                              mode: "light",
+                              primary: "#7c3aed",
+                              canvas: "#ffffff",
+                              text: "#111827",
+                              secondary: "#64748b",
+                              inputBorder: "rgba(15, 23, 42, 0.12)",
+                              inputFill: "#f8fafc",
+                            }
+                          : {
+                              mode: "dark",
+                              primary: "#38bdf8",
+                              canvas: "#0c0f16",
+                              text: "#f1f5f9",
+                              secondary: "#64748b",
+                              inputBorder: "rgba(255, 255, 255, 0.12)",
+                              inputFill: "rgba(255, 255, 255, 0.04)",
+                            },
                       }}
                       onVerify={(token) => {
                         setCaptchaToken(token);

@@ -148,6 +148,12 @@ export const SNAKESTER_GALLERY_IMAGES = [
   "/project_imgs/SS_reviews.png",
 ] as const;
 
+export const WEONLINE_GALLERY_IMAGES = [
+  "/project_imgs/weonline_home.png",
+  "/project_imgs/weonline_search.png",
+  "/project_imgs/weonline_singup.png",
+] as const;
+
 export const REELSTORE_GALLERY_IMAGES = [
   "/project_imgs/reelstore_home.png",
   "/project_imgs/reelstore_product_review.png",
@@ -281,13 +287,13 @@ export const PROJECTS = [
   },
   {
     title: "We-Online",
-    subtitle: "Business Web Presence",
+    subtitle: "Local Business Directory (WeOnline)",
     description:
-      "Marketing and service landing experience for an online-first brand — clear value sections, contact and lead paths, responsive layout, and fast Vercel deployment. Structured for easy content updates and future feature expansion.",
-    tags: ["Next.js", "React", "Tailwind CSS", "Landing Page"],
+      "Discovery platform to find nearby businesses, services, and professionals — search-first homepage, popular categories, featured listings, city browse, and partner onboarding. Built around verified listings, community reviews, and direct enquiries to business owners.",
+    tags: ["Next.js", "React", "Node.js", "Directory", "Search"],
     featured: false,
-    url: "https://heyweek.com/",
-    images: HEYWEEK_GALLERY_IMAGES,
+    url: "https://we-online-business-5lv9.vercel.app/",
+    images: WEONLINE_GALLERY_IMAGES,
   },
 ] as const;
 
